@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { ListAddressComponent } from './address/list-address/list-address.component';
 import { CustomerComponent } from './customer/customer.component';
+import { SharedModule } from '..//shared/shared.module';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { CustomerComponent } from './customer/customer.component';
 
   imports: [
     CommonModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    SharedModule,
   ]
 })
 export class CustomerModule { }

@@ -21,6 +21,15 @@ import { HeaderComponent } from './header/header.component';
     BackendFooterComponent,
     MatedialogComponent,
   ],
+  exports: [
+    HeaderComponent,
+    SidebarComponent,
+    FooterComponent,
+    BackendHeaderComponent,
+    BackendSidebarComponent,
+    BackendFooterComponent,
+    MatedialogComponent,
+  ],
 
   imports: [
     CommonModule,
