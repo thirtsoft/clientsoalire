@@ -16,9 +16,13 @@ import { ListLigneCommandeComponent } from './list-ligne-commande/list-ligne-com
 import { ListAddressClientComponent } from './list-address-client/list-address-client.component';
 import { ListAddressLivraisonComponent } from './list-address-livraison/list-address-livraison.component';
 import { ListNoteArticleComponent } from './list-note-article/list-note-article.component';
-
+import { AccueilComponent } from './accueil/accueil.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: AccueilComponent
+  },
   {
     path: 'categories',
     component: ListCategoryComponent

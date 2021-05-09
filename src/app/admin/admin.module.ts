@@ -17,6 +17,7 @@ import { CreateArticleComponent } from './article/create-article/create-article.
 import { ListArticleComponent } from './article/list-article/list-article.component';
 import { ListAddressClientComponent } from './list-address-client/list-address-client.component';
 import { ListAddressLivraisonComponent } from './list-address-livraison/list-address-livraison.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ListAddressLivraisonComponent } from './list-address-livraison/list-add
     ListClientComponent,
     ListCommandeComponent,
     ListLigneCommandeComponent,
-    ListNoteArticleComponent
+    ListNoteArticleComponent,
+    AccueilComponent
   ],
 
   imports: [
