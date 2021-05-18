@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { SharedModule } from './../shared/shared.module';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatDialogModule } from '@angular/material/dialog';
@@ -25,8 +26,6 @@ import { ListCommandeComponent } from './list-commande/list-commande.component';
 import { ListNoteArticleComponent } from './list-note-article/list-note-article.component';
 import { ListLigneCommandeComponent } from './list-ligne-commande/list-ligne-commande.component';
 import { ListUtilisateurComponent } from './utilisateur/list-utilisateur/list-utilisateur.component';
-import { AddUtilisateurComponent } from './add-utilisateur/add-utilisateur.component';
-import { AddFournisseurComponent } from './add-fournisseur/add-fournisseur.component';
 import { ListFournisseurComponent } from './fournisseur/list-fournisseur/list-fournisseur.component';
 import { CreateScategoryComponent } from './scategory/create-scategory/create-scategory.component';
 import { ListScategoryComponent } from './scategory/list-scategory/list-scategory.component';
@@ -37,6 +36,8 @@ import { ListArticleComponent } from './article/list-article/list-article.compon
 import { ListAddressClientComponent } from './list-address-client/list-address-client.component';
 import { ListAddressLivraisonComponent } from './list-address-livraison/list-address-livraison.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
+import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     ListScategoryComponent,
     CreateScategoryComponent,
     ListFournisseurComponent,
-    AddFournisseurComponent,
-    AddUtilisateurComponent,
+    CreateFournisseurComponent,
+    CreateUtilisateurComponent,
     ListUtilisateurComponent,
     ListClientComponent,
     ListCommandeComponent,
@@ -62,6 +63,7 @@ import { AccueilComponent } from './accueil/accueil.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,

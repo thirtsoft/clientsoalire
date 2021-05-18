@@ -1,1 +1,51 @@
-<p>list-address-client works!</p>
+<h3><i class="fa fa-angle-right"></i> List of addresses clients</h3>
+<div>
+
+    <div class="row">
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+
+    </div>
+
+    <table class="table table-striped">
+
+        <thead class="thead-inverse">
+            <tr>
+                <th>Reference</th>
+                <th>Client</th>
+                <th>Quartier</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Rue</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let add of addressList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{add?.reference}}</td>
+                <td>{{add?.client?.firstName}} {{add?.client?.lastName}}</td>
+                <td>{{add?.quartier}}</td>
+                <td>{{add?.phone}}</td>
+                <td>{{add?.city}}</td>
+                <td>{{add?.rue}}</td>
+                <td>{{add?.country}}</td>
+
+                <td>
+                    <div class="container ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditAddress(add) ">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteAddress(add)">
+                          <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="pagination ">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+</div>

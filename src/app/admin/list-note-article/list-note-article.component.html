@@ -1,1 +1,47 @@
-<p>list-note-article works!</p>
+<h3><i class="fa fa-angle-right"></i> List of notes</h3>
+<div>
+
+    <div class="row">
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+
+    </div>
+
+    <table class="table table-striped">
+
+        <thead class="thead-inverse">
+            <tr>
+                <th>Reference</th>
+                <th>Nombre Etoile</th>
+                <th>Article</th>
+                <th>Utilisateur</th>
+                <th>Observation</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let note of noteArticleList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{note?.reference}}</td>
+                <td>{{note?.nbreEtoile}}</td>
+                <td>{{note?.article?.designation}}</td>
+                <td>{{note?.utilisateur?.name}}</td>
+                <td>{{note?.observation}}</td>
+
+                <td>
+                    <div class="container ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditNote(note) ">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteNote(note)">
+                          <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="pagination ">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+</div>

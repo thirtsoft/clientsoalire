@@ -1,1 +1,51 @@
-<p>list-address-livraison works!</p>
+<h3><i class="fa fa-angle-right"></i> List of livraisons</h3>
+<div>
+
+    <div class="row">
+        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+
+    </div>
+
+    <table class="table table-striped">
+
+        <thead class="thead-inverse">
+            <tr>
+                <th>Reference</th>
+                <th>Commande</th>
+                <th>Quartier</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Rue</th>
+                <th>Country</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let liv of livraisonList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{liv?.reference}}</td>
+                <td>{{liv?.commandeDto?.reference}}</td>
+                <td>{{liv?.quartier}}</td>
+                <td>{{liv?.phone}}</td>
+                <td>{{liv?.city}}</td>
+                <td>{{liv?.rue}}</td>
+                <td>{{liv?.country}}</td>
+
+                <td>
+                    <div class="container ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditLivraison(liv) ">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteLivraison(liv)">
+                          <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="pagination ">
+        <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+</div>
