@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddressLivraisonService } from './../../services/address-livraison.service';
-import { AddressLivraison } from './../../models/address-livraison';
+import { AddressLivraison, AddressLivraisonDto } from './../../models/address-livraison';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListAddressLivraisonComponent implements OnInit {
 
   livraisonList: AddressLivraison[];
+  livraisonListDTO: AddressLivraisonDto[];
   editAddressLivraison: AddressLivraison;
   deleteAddressLivraison: AddressLivraison;
 
@@ -27,6 +28,19 @@ export class ListAddressLivraisonComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListLivraisons();
+    this.getListAddressLivraisonDTOs();
+  }
+
+  public getListAddressLivraisonDTOs() {
+    this.livService.getAddressLivraisonDTOs().subscribe(
+      (response: AddressLivraisonDto[]) => {
+        this.livraisonListDTO = response;
+        console.log(this.livraisonListDTO);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public getListLivraisons(): void {
@@ -45,10 +59,10 @@ export class ListAddressLivraisonComponent implements OnInit {
 
   }
   public onDeleteLivraison(cltId: number): void {
-    this.livService.deleteAddressLivraison(cltId).subscribe(
+    this.livService.deleteAddressLivraisonDto(cltId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListLivraisons();
+        this.getListAddressLivraisonDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

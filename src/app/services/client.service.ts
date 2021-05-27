@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Client } from './../models/client';
+import { Client, ClientDto } from './../models/client';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -31,6 +31,27 @@ export class ClientService {
   }
 
   public deleteClient(clientId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/clients/delete/${clientId}`);
+  }
+
+  /******************** ClientDTO ****************/
+  public getClientDTOs(): Observable<ClientDto[]> {
+    return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/all`);
+  }
+
+  public getClientDTOById(clientId: number): Observable<ClientDto> {
+    return this.http.get<ClientDto>(`${this.apiServerUrl}/clients/${clientId}`);
+  }
+
+  public addClientDTO(clientDTO: ClientDto): Observable<ClientDto> {
+    return this.http.post<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
+  }
+
+  public updateClientDTO(clientDTO: ClientDto): Observable<ClientDto> {
+    return this.http.put<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
+  }
+
+  public deleteClientDTO(clientId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/clients/delete/${clientId}`);
   }
 

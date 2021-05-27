@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CommandeService } from './../../services/commande.service';
-import { Commande } from './../../models/commande';
+import { Commande, CommandeDto } from './../../models/commande';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListCommandeComponent implements OnInit {
 
   commandeList: Commande[];
+  commandeListDTO: CommandeDto[];
   editCommande: Commande;
   deleteCommande: Commande;
 
@@ -27,6 +28,20 @@ export class ListCommandeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCommandes();
+    this.getListCommandeDTOs();
+  }
+
+  public getListCommandeDTOs() {
+    this.comService.getCommandeDTOs().subscribe(
+      (response: CommandeDto[]) => {
+        this.commandeListDTO = response;
+        console.log(this.commandeListDTO);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
 
   public getListCommandes(): void {
@@ -45,10 +60,10 @@ export class ListCommandeComponent implements OnInit {
 
   }
   public onDeleteCommande(comId: number): void {
-    this.comService.deleteCommande(comId).subscribe(
+    this.comService.deleteCommandeDTO(comId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListCommandes();
+        this.getListCommandeDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

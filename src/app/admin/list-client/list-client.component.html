@@ -19,19 +19,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let clt of clientList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{clt?.reference}}</td>
-                <td>{{clt?.firstName}}</td>
-                <td>{{clt?.lastName}}</td>
-                <td>{{clt?.phoneClient}}</td>
-                <td>{{clt?.email}}</td>
+            <tr *ngFor="let cltDTO of clientListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{cltDTO?.reference}}</td>
+                <td>{{cltDTO?.firstName}}</td>
+                <td>{{cltDTO?.lastName}}</td>
+                <td>{{cltDTO?.phoneClient}}</td>
+                <td>{{cltDTO?.email}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditClient(clt) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditClient(cltDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteClient(clt)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteClient(cltDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

@@ -19,19 +19,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let note of noteArticleList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{note?.reference}}</td>
-                <td>{{note?.nbreEtoile}}</td>
-                <td>{{note?.article?.designation}}</td>
-                <td>{{note?.utilisateur?.name}}</td>
-                <td>{{note?.observation}}</td>
+            <tr *ngFor="let noteDTO of noteDTOList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{noteDTO?.reference}}</td>
+                <td>{{noteDTO?.nbreEtoile}}</td>
+                <td>{{noteDTO?.articleDto?.designation}}</td>
+                <td>{{noteDTO?.utilisateurDto?.name}}</td>
+                <td>{{noteDTO?.observation}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditNote(note) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditNote(noteDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteNote(note)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteNote(noteDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

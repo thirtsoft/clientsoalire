@@ -7,3 +7,14 @@ export class Client {
   phoneClient: string;
 
 }
+
+export class ClientDto {
+  id: number;
+  reference: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string ;
+  address: string;
+
+}

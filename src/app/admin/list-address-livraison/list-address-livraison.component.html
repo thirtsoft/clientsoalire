@@ -21,21 +21,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let liv of livraisonList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{liv?.reference}}</td>
-                <td>{{liv?.commandeDto?.reference}}</td>
-                <td>{{liv?.quartier}}</td>
-                <td>{{liv?.phone}}</td>
-                <td>{{liv?.city}}</td>
-                <td>{{liv?.rue}}</td>
-                <td>{{liv?.country}}</td>
+            <tr *ngFor="let livDTO of livraisonListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{livDTO?.reference}}</td>
+                <td>{{livDTO?.commandeDto?.reference}}</td>
+                <td>{{livDTO?.quartier}}</td>
+                <td>{{livDTO?.phone}}</td>
+                <td>{{livDTO?.city}}</td>
+                <td>{{livDTO?.rue}}</td>
+                <td>{{livDTO?.country}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditLivraison(liv) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditLivraison(livDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteLivraison(liv)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteLivraison(livDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

@@ -2,7 +2,7 @@ import { CreateFournisseurComponent } from './../create-fournisseur/create-fourn
 import { MatDialog } from '@angular/material/dialog';
 import { FournisseurService } from './../../../services/fournisseur.service';
 import { Router } from '@angular/router';
-import { Fournisseur } from './../../../models/fournisseur';
+import { Fournisseur, FournisseurDto } from './../../../models/fournisseur';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListFournisseurComponent implements OnInit {
 
   fournisseurList: Fournisseur[];
+  fournisseurListDTO: FournisseurDto[];
   editFournisseur: Fournisseur;
   deleteFournisseur: Fournisseur;
 
@@ -28,6 +29,20 @@ export class ListFournisseurComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListFournisseurs();
+    this.getListFournisseurDTOs();
+  }
+
+  public getListFournisseurDTOs() {
+    this.fourService.getFournisseurDTOs().subscribe(
+      (response: FournisseurDto[]) => {
+        this.fournisseurListDTO = response;
+        console.log(this.fournisseurListDTO);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
 
   public getListFournisseurs(): void {
@@ -62,15 +77,14 @@ export class ListFournisseurComponent implements OnInit {
     });
   }
 
-
   addEditFournisseur(i) {
 
   }
   public onDeleteFournisseur(fourId: number): void {
-    this.fourService.deleteFournisseur(fourId).subscribe(
+    this.fourService.deleteFournisseurDTO(fourId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListFournisseurs();
+        this.getListFournisseurDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

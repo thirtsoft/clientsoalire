@@ -3,3 +3,9 @@ export class Category {
   code: string;
   designation: string;
 }
+
+export class CategoryDto {
+  id: number;
+  code: string;
+  designation: string;
+}

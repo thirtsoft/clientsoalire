@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddressClientService } from './../../services/address-client.service';
-import { AddressClient } from './../../models/address-client';
+import { AddressClient, AddressClientDto } from './../../models/address-client';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListAddressClientComponent implements OnInit {
 
   addressList: AddressClient[];
+  addressClientListDTO: AddressClientDto[];
   editAddressClient: AddressClient;
   deleteAddressClient: AddressClient;
 
@@ -27,6 +28,19 @@ export class ListAddressClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListAddresses();
+    this.getAddressClientDTOs();
+  }
+
+  public getAddressClientDTOs() {
+    this.addService.getAddressClientDTOs().subscribe(
+      (response: AddressClientDto[]) => {
+        this.addressClientListDTO = response;
+        console.log(this.addressClientListDTO);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public getListAddresses(): void {
@@ -41,14 +55,12 @@ export class ListAddressClientComponent implements OnInit {
     );
   }
 
-  addEditAddress(i) {
-
-  }
+  addEditAddress(i) {}
   public onDeleteAddress(addId: number): void {
-    this.addService.deleteAddressClient(addId).subscribe(
+    this.addService.deleteAddressClientDto(addId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListAddresses();
+        this.getAddressClientDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -22,19 +22,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of utilisateurList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{user?.photo}}</td>
-                <td>{{user?.name}}</td>
-                <td>{{user?.username}}</td>
-                <td>{{user?.mobile}}</td>
-                <td>{{user?.email}}</td>
+            <tr *ngFor="let userDTO of utilisateurListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{userDTO?.photo}}</td>
+                <td>{{userDTO?.name}}</td>
+                <td>{{userDTO?.username}}</td>
+                <td>{{userDTO?.mobile}}</td>
+                <td>{{userDTO?.email}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditUtilisateur(user) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditUtilisateur(userDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteUtilisateur(user)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteUtilisateur(userDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

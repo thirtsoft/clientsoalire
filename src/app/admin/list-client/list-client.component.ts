@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientService } from './../../services/client.service';
-import { Client } from './../../models/client';
+import { Client, ClientDto } from './../../models/client';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListClientComponent implements OnInit {
 
   clientList: Client[];
+  clientListDTO: ClientDto[];
   editClient: Client;
   deleteClient: Client;
 
@@ -27,6 +28,19 @@ export class ListClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListClients();
+    this.getListClientDTOs();
+  }
+
+  public getListClientDTOs() {
+    this.cltService.getClientDTOs().subscribe(
+      (response: ClientDto[]) => {
+        this.clientListDTO = response;
+        console.log(this.clientListDTO);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public getListClients(): void {
@@ -45,10 +59,10 @@ export class ListClientComponent implements OnInit {
 
   }
   public onDeleteClient(cltId: number): void {
-    this.cltService.deleteClient(cltId).subscribe(
+    this.cltService.deleteClientDTO(cltId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListClients();
+        this.getListClientDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

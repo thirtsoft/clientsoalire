@@ -1,5 +1,5 @@
 import { CategoryService } from './../../../services/category.service';
-import { Category } from './../../../models/category';
+import { Category, CategoryDto } from './../../../models/category';
 import { CreateCategoryComponent } from './../create-category/create-category.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class ListCategoryComponent implements OnInit {
 
   categories: Category[];
+  categoryListDTO: CategoryDto[];
   deleteCategory: Category;
   categorie : Category = new Category();
   id : number;
@@ -26,14 +27,28 @@ export class ListCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
+    this.getCategoryDTOs();
   }
 
   public getCategories(): void {
     this.categoryService.getCategories().subscribe(
       (response: Category[]) => {
-        this.categories = response;
+        this.categoryListDTO = response;
      //   console.log(this.categories[0].idCategory);
         console.log(this.categories);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public getCategoryDTOs(): void {
+    this.categoryService.getCategoryDTOs().subscribe(
+      (response: CategoryDto[]) => {
+        this.categoryListDTO = response;
+     //   console.log(this.categories[0].idCategory);
+        console.log(this.categoryListDTO);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -26,23 +26,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let four of fournisseurList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{four?.reference}}</td>
-                <td>{{four?.article?.reference}} {{four?.article?.designation}}</td>
-                <td>{{four?.firstName}}</td>
-                <td>{{four?.lastName}}</td>
-                <td>{{four?.address}}</td>
-                <td>{{four?.telephoneFournisseur}}</td>
-                <td>{{four?.email}}</td>
-                <td>{{four?.city}}</td>
-                <td>{{four?.country}}</td>
+            <tr *ngFor="let fourDTO of fournisseurListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{fourDTO?.reference}}</td>
+                <td>{{fourDTO?.articleDto.reference}} {{fourDTO?.articleDto?.designation}}</td>
+                <td>{{fourDTO?.firstName}}</td>
+                <td>{{fourDTO?.lastName}}</td>
+                <td>{{fourDTO?.address}}</td>
+                <td>{{fourDTO?.telephoneFournisseur}}</td>
+                <td>{{fourDTO?.email}}</td>
+                <td>{{fourDTO?.city}}</td>
+                <td>{{fourDTO?.country}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(four) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(fourDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteFournisseur(four)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteFournisseur(fourDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

@@ -1,3 +1,4 @@
+import { NoteDto } from './../../models/note';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +14,7 @@ import { Note } from 'src/app/models/note';
 export class ListNoteArticleComponent implements OnInit {
 
   noteArticleList: Note[];
+  noteDTOList: NoteDto[];
   editNote: Note;
   deleteNote: Note;
 
@@ -27,6 +29,20 @@ export class ListNoteArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListNotes();
+    this.getListNoteDTOs();
+  }
+
+  public getListNoteDTOs() {
+    this.noteService.getNotificationDTOs().subscribe(
+      (response: NoteDto[]) => {
+        this.noteDTOList = response;
+        console.log(this.noteDTOList);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
 
   public getListNotes(): void {
@@ -46,10 +62,10 @@ export class ListNoteArticleComponent implements OnInit {
 
   }
   public onDeleteNote(noteId: number): void {
-    this.noteService.deleteNotification(noteId).subscribe(
+    this.noteService.deleteNotificationDTO(noteId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getListNotes();
+        this.getListNoteDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

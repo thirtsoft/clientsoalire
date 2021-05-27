@@ -1,7 +1,7 @@
 import { ArticleService } from './../../../services/article.service';
 import { ScategoryService } from './../../../services/scategory.service';
 import { Router } from '@angular/router';
-import { Article } from './../../../models/article';
+import { Article, ArticleDto } from './../../../models/article';
 import { Scategory } from './../../../models/scategory';
 import { CreateArticleComponent } from './../create-article/create-article.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,21 +16,20 @@ import { MatDialog } from '@angular/material/dialog';
 export class ListArticleComponent implements OnInit {
 
   articles: Article[];
+  articleListDTO: ArticleDto[];
   editArticle: Article;
   deleteArticle: Article;
 
-  listDataScategories: Scategory[];
   id : number;
   p : number=1;
   searchText;
 
   constructor(private articleService: ArticleService,
-              private scategorieService: ScategoryService,
-              private dialog:MatDialog,
+              private dialog: MatDialog,
               private router: Router){}
 
   ngOnInit(): void {
-    this.getScategories();
+    this.getListArticleDTOs();
     this.getArticles();
   }
 
@@ -45,12 +44,11 @@ export class ListArticleComponent implements OnInit {
       }
     );
   }
-
-  public getScategories(): void {
-    this.scategorieService.getScategories().subscribe(
-      (response: Scategory[]) => {
-        this.listDataScategories = response;
-        console.log(this.listDataScategories);
+  public getListArticleDTOs(): void {
+    this.articleService.getArticleDTOs().subscribe(
+      (response: ArticleDto[]) => {
+        this.articleListDTO = response;
+        console.log(this.articleListDTO);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -85,10 +83,10 @@ export class ListArticleComponent implements OnInit {
 
   }
   public onDeleteArticle(articleId: number): void {
-    this.articleService.deleteArticle(articleId).subscribe(
+    this.articleService.deleteArticleDto(articleId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getArticles();
+        this.getListArticleDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -20,20 +20,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let com of commandeList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{com?.reference}}</td>
-                <td>{{com?.numeroCommande}}</td>
-                <td>{{com?.client?.firstName}} {{com?.client?.lastName}}</td>
-                <td>{{com?.total}}</td>
-                <td>{{com?.statusCommande}}</td>
-                <td>{{com?.dateCommande}}</td>
+            <tr *ngFor="let comDTO of commandeListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{comDTO?.reference}}</td>
+                <td>{{comDTO?.numeroCommande}}</td>
+                <td>{{comDTO?.clientDto?.firstName}} {{comDTO?.clientDto?.lastName}}</td>
+                <td>{{comDTO?.total}}</td>
+                <td>{{comDTO?.statusCommande}}</td>
+                <td>{{comDTO?.dateCommande}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditCommande(com) ">
+                        <button mat-raised-button class="action-button btn-primary" (click)="addEditCommande(comDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteCommande(com)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteCommande(comDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

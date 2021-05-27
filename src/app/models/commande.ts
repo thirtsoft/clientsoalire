@@ -1,5 +1,5 @@
 import { StatusCommande } from './status-commande';
-import { Client } from './client';
+import { Client, ClientDto } from './client';
 export class Commande {
   id: number;
   reference: string;
@@ -9,5 +9,19 @@ export class Commande {
 
   statusCommande: StatusCommande;
 
-  clientDto: Client;
+  client: Client;
+}
+
+export class CommandeDto {
+
+  id: number;
+  reference: string;
+  numeroCommande: string;
+  total: number;
+  dateCommande: Date;
+
+  statusCommande: StatusCommande;
+
+  clientDto: ClientDto;
+
 }

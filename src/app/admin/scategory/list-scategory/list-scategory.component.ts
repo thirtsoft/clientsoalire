@@ -2,7 +2,7 @@ import { ScategoryService } from './../../../services/scategory.service';
 import { CategoryService } from './../../../services/category.service';
 import { Router } from '@angular/router';
 import { Category } from './../../../models/category';
-import { Scategory } from './../../../models/scategory';
+import { Scategory, ScategoryDto } from './../../../models/scategory';
 import { CreateScategoryComponent } from './../create-scategory/create-scategory.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -19,28 +19,26 @@ export class ListScategoryComponent implements OnInit {
   public editScategory: Scategory;
   public deleteScategory: Scategory;
 
-  listDataCategories: Category[];
+  scategoryListDTO: ScategoryDto[];
   id : number;
   p : number=1;
   searchText;
 
 
   constructor(private scategorieService: ScategoryService,
-              private categoryService: CategoryService,
               private dialog:MatDialog,
               private router: Router){}
 
   ngOnInit(): void {
-    this.getlistCategories();
     this.getScategories();
+    this.getScategoryDTOList();
   }
 
-  public getlistCategories(): void {
-    this.categoryService.getCategories().subscribe(
-      (response: Category[]) => {
-        this.listDataCategories = response;
-     //   console.log(this.categories[0].idCategory);
-        console.log(this.listDataCategories);
+  public getScategoryDTOList(): void {
+    this.scategorieService.getScategoryDTOs().subscribe(
+      (response: ScategoryDto[]) => {
+        this.scategoryListDTO = response;
+        console.log(this.scategoryListDTO);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -88,10 +86,10 @@ export class ListScategoryComponent implements OnInit {
 
   }
   public onDeleteScategorie(scategorieId: number): void {
-    this.scategorieService.deleteScategory(scategorieId).subscribe(
+    this.scategorieService.deleteScategoryDTO(scategorieId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getScategories();
+        this.getScategoryDTOList();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
