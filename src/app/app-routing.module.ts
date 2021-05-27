@@ -1,3 +1,4 @@
+import { CategoriesComponent } from './layouts/categories/categories.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -6,11 +7,19 @@ import { DEFAULT_ROUTES } from './routes/default-layout-routes';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
-
+import { AccueilComponent } from './layouts/accueil/accueil.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: AccueilComponent
+  },
+  {
+    path: 'shop-categories',
+    component: CategoriesComponent
+  },
+  {
+    path: 'home',
     component: DefaultLayoutComponent,
     children: DEFAULT_ROUTES
   },

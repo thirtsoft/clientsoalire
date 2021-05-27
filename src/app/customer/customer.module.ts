@@ -17,6 +17,10 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { ListAddressComponent } from './address/list-address/list-address.component';
 import { CustomerComponent } from './customer/customer.component';
 import { SharedModule } from '..//shared/shared.module';
+import { ShopListComponent } from './shop-list/shop-list.component';
+import { SingleProductComponent } from './single-product/single-product.component';
+import { AccountOrderComponent } from './account-order/account-order.component';
+import { WishListComponent } from './wish-list/wish-list.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { SharedModule } from '..//shared/shared.module';
     ResumeComponent,
     ListNoteComponent,
     AddNoteComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ShopListComponent,
+    SingleProductComponent,
+    AccountOrderComponent,
+    WishListComponent
   ],
 
   imports: [

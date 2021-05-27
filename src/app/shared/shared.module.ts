@@ -19,6 +19,7 @@ import { BackendHeaderComponent } from './backend-header/backend-header.componen
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -31,10 +32,12 @@ import { HeaderComponent } from './header/header.component';
     BackendSidebarComponent,
     BackendFooterComponent,
     MatedialogComponent,
+    NavbarComponent,
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
+    NavbarComponent,
     FooterComponent,
     BackendHeaderComponent,
     BackendSidebarComponent,

@@ -10,12 +10,18 @@ import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
+import { AccueilComponent } from './layouts/accueil/accueil.component';
+import { CategoriesComponent } from './layouts/categories/categories.component';
+
+declare var $: any;
 
 @NgModule({
   declarations: [
     AppComponent,
     DefaultLayoutComponent,
     AdminLayoutComponent,
+    AccueilComponent,
+    CategoriesComponent,
   ],
 
   imports: [

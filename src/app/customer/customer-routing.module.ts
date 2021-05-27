@@ -1,5 +1,8 @@
+import { WishListComponent } from './wish-list/wish-list.component';
+import { AccountOrderComponent } from './account-order/account-order.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { PayementComponent } from './payement/payement.component';
 import { ListAddressComponent } from './address/list-address/list-address.component';
 import { AddAdressComponent } from './address/add-adress/add-adress.component';
@@ -15,13 +18,14 @@ import { BillingAddressComponent } from './billing-address/billing-address.compo
 import { HistoriqueCommandeComponent } from './commande/historique-commande/historique-commande.component';
 import { AddCommandeComponent } from './commande/add-commande/add-commande.component';
 import { HomeComponent } from './home/home.component';
+import { ShopListComponent } from './shop-list/shop-list.component';
 
 
 const routes: Routes = [
-  {
+  /* {
     path: '',
     component: HomeComponent
-  },
+  }, */
   {
     path: 'commande',
     component: AddCommandeComponent
@@ -59,7 +63,24 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'payments',
+    path: 'single-Product',
+    component: ShopListComponent
+  },
+  {
+    path: 'shop',
+    component: ShopListComponent
+  },
+  {
+    path: 'account-orders',
+    component: AccountOrderComponent
+  },
+  {
+    path: 'account-wishList',
+    component: WishListComponent
+  },
+
+  {
+    path: 'payment',
     component: PayementComponent
   },
   {
