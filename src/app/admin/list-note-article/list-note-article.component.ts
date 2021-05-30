@@ -1,3 +1,5 @@
+import { DialogService } from './../../services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 import { NoteDto } from './../../models/note';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,44 +15,29 @@ import { Note } from 'src/app/models/note';
 })
 export class ListNoteArticleComponent implements OnInit {
 
-  noteArticleList: Note[];
-  noteDTOList: NoteDto[];
-  editNote: Note;
-  deleteNote: Note;
+  notificationDTOList: NoteDto[];
+  deleteNotificationDTO: NoteDto;
 
   id : number;
   p : number=1;
   searchText;
 
-
   constructor(private noteService: NoteService,
+              private router: Router,
               private dialog: MatDialog,
-              private router: Router){}
+              public toastr: ToastrService,
+              private dialogService: DialogService
+              ){}
 
   ngOnInit(): void {
-    this.getListNotes();
-    this.getListNoteDTOs();
+    this.getNotificationDtos();
   }
 
-  public getListNoteDTOs() {
+  public getNotificationDtos(): void {
     this.noteService.getNotificationDTOs().subscribe(
       (response: NoteDto[]) => {
-        this.noteDTOList = response;
-        console.log(this.noteDTOList);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-
-  }
-
-  public getListNotes(): void {
-    this.noteService.getNotifications().subscribe(
-      (response: Note[]) => {
-        this.noteArticleList = response;
-     //   console.log(this.categories[0].idCategory);
-        console.log(this.noteArticleList);
+        this.notificationDTOList = response;
+        console.log(this.notificationDTOList);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -58,19 +45,20 @@ export class ListNoteArticleComponent implements OnInit {
     );
   }
 
-  addEditNote(i) {
-
-  }
-  public onDeleteNote(noteId: number): void {
-    this.noteService.deleteNotificationDTO(noteId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getListNoteDTOs();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+  public onDeleteNotification(note: NoteDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.noteService.deleteNotificationDTO(note.id).subscribe(data => {
+          this.toastr.warning('Notification supprimé avec succès!');
+          this.notificationDTOList = this.notificationDTOList.filter(u => u !== note);
+          this.getNotificationDtos();
+        });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
-
 }

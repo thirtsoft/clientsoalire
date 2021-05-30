@@ -6,9 +6,10 @@ export class Fournisseur {
   lastName: string;
   address: string;
   email: string;
-  telephoneFournisseur: string;
+  telephone: string;
   city: string;
-  country: string;
+  town: string;
+  rue: string;
 
   article: Article;
 }
@@ -20,9 +21,10 @@ export class FournisseurDto {
   lastName: string;
   address: string;
   email: string;
-  telephoneFournisseur: string;
+  telephone: string;
   city: string;
-  country: string;
+  town: string;
+  rue: string;
 
   articleDto: ArticleDto;
 

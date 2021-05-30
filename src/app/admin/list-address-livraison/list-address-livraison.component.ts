@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from './../../services/dialog.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddressLivraisonService } from './../../services/address-livraison.service';
@@ -12,30 +14,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAddressLivraisonComponent implements OnInit {
 
-  livraisonList: AddressLivraison[];
-  livraisonListDTO: AddressLivraisonDto[];
-  editAddressLivraison: AddressLivraison;
-  deleteAddressLivraison: AddressLivraison;
+  addressLivraisonDTOList: AddressLivraisonDto[];
+  deleteAddressLivraisonDTO: AddressLivraisonDto;
 
   id : number;
   p : number=1;
   searchText;
 
-
-  constructor(private livService: AddressLivraisonService,
+  constructor(private addLivraisonService: AddressLivraisonService,
+              private router: Router,
               private dialog: MatDialog,
-              private router: Router){}
+              public toastr: ToastrService,
+              private dialogService: DialogService
+  ){}
 
   ngOnInit(): void {
-    this.getListLivraisons();
-    this.getListAddressLivraisonDTOs();
+    this.getAddressLivraisonDtos();
   }
 
-  public getListAddressLivraisonDTOs() {
-    this.livService.getAddressLivraisonDTOs().subscribe(
+  public getAddressLivraisonDtos(): void {
+    this.addLivraisonService.getAddressLivraisonDTOs().subscribe(
       (response: AddressLivraisonDto[]) => {
-        this.livraisonListDTO = response;
-        console.log(this.livraisonListDTO);
+        this.addressLivraisonDTOList = response;
+        console.log(this.addressLivraisonDTOList);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -43,32 +44,20 @@ export class ListAddressLivraisonComponent implements OnInit {
     );
   }
 
-  public getListLivraisons(): void {
-    this.livService.getAddressLivraisons().subscribe(
-      (response: AddressLivraison[]) => {
-        this.livraisonList = response;
-        console.log(this.livraisonList);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+  public onDeleteAddressLivraison(livraison: AddressLivraisonDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.addLivraisonService.deleteAddressLivraisonDto(livraison.id).subscribe(data => {
+          this.toastr.warning('AddressLivraison supprimé avec succès!');
+          this.addressLivraisonDTOList = this.addressLivraisonDTOList.filter(u => u !== livraison);
+          this.getAddressLivraisonDtos();
+        });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
-
-  addEditLivraison(i) {
-
-  }
-  public onDeleteLivraison(cltId: number): void {
-    this.livService.deleteAddressLivraisonDto(cltId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getListAddressLivraisonDTOs();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-
 }

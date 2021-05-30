@@ -1,9 +1,11 @@
-<h3><i class="fa fa-angle-right"></i> List of livraisons</h3>
+<h3><i class="fa fa-angle-right"></i> List of addressLivraisons</h3>
 <div>
 
     <div class="row">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
-
+        <!--
+        <button _ngcontent-roy-c3="" class="btn-meeting" type="submit" style="margin-left: 5%; width: 30%;" (click)="onCreateFournisseur()">Add fournisseur</button>
+ -->
     </div>
 
     <table class="table table-striped">
@@ -21,21 +23,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let livDTO of livraisonListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{livDTO?.reference}}</td>
-                <td>{{livDTO?.commandeDto?.reference}}</td>
-                <td>{{livDTO?.quartier}}</td>
-                <td>{{livDTO?.phone}}</td>
-                <td>{{livDTO?.city}}</td>
-                <td>{{livDTO?.rue}}</td>
-                <td>{{livDTO?.country}}</td>
+            <tr *ngFor="let addLivraisonDTO of addressLivraisonDTOList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{addLivraisonDTO?.reference}}</td>
+                <td>{{addLivraisonDTO?.commandeDto.numeroCommande}}</td>
+                <td>{{addLivraisonDTO?.phone}}</td>
+                <td>{{addLivraisonDTO?.city}}</td>
+                <td>{{addLivraisonDTO?.rue}}</td>
+                <td>{{addLivraisonDTO?.country}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditLivraison(livDTO) ">
+                        <!--   <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(categoryDTO) ">
                           <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteLivraison(livDTO)">
+                        </button> -->
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteAddressLivraison(addLivraisonDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

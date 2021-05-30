@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from './../../services/dialog.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,43 +14,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCommandeComponent implements OnInit {
 
-  commandeList: Commande[];
-  commandeListDTO: CommandeDto[];
-  editCommande: Commande;
-  deleteCommande: Commande;
+  commandeDTOList: CommandeDto[];
+  deleteCommandeDTO: CommandeDto;
 
   id : number;
   p : number=1;
   searchText;
 
-
   constructor(private comService: CommandeService,
+              private router: Router,
               private dialog: MatDialog,
-              private router: Router){}
+              public toastr: ToastrService,
+              private dialogService: DialogService
+  ){}
 
   ngOnInit(): void {
-    this.getListCommandes();
-    this.getListCommandeDTOs();
+    this.getListCommandeDtos();
   }
 
-  public getListCommandeDTOs() {
+  public getListCommandeDtos(): void {
     this.comService.getCommandeDTOs().subscribe(
       (response: CommandeDto[]) => {
-        this.commandeListDTO = response;
-        console.log(this.commandeListDTO);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-
-  }
-
-  public getListCommandes(): void {
-    this.comService.getCommandes().subscribe(
-      (response: Commande[]) => {
-        this.commandeList = response;
-        console.log(this.commandeList);
+        this.commandeDTOList = response;
+        console.log(this.commandeDTOList);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -56,20 +44,21 @@ export class ListCommandeComponent implements OnInit {
     );
   }
 
-  addEditCommande(i) {
-
-  }
-  public onDeleteCommande(comId: number): void {
-    this.comService.deleteCommandeDTO(comId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getListCommandeDTOs();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+  public onDeleteCommande(com: CommandeDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.comService.deleteCommandeDTO(com.id).subscribe(data => {
+          this.toastr.warning('Commande supprimé avec succès!');
+          this.commandeDTOList = this.commandeDTOList.filter(u => u !== com);
+          this.getListCommandeDtos();
+        });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
-
 
 }

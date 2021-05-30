@@ -1,10 +1,12 @@
-import { CategoryService } from './../../../services/category.service';
-import { Category, CategoryDto } from './../../../models/category';
-import { CreateCategoryComponent } from './../create-category/create-category.component';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { DialogService } from './../../../services/dialog.service';
+import { CategoryService } from './../../../services/category.service';
+import { CategoryDto } from './../../../models/category';
+import { CreateCategoryComponent } from './../create-category/create-category.component';
 
 @Component({
   selector: 'app-list-category',
@@ -13,51 +15,36 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListCategoryComponent implements OnInit {
 
-  categories: Category[];
   categoryListDTO: CategoryDto[];
-  deleteCategory: Category;
-  categorie : Category = new Category();
+  categoryDTO : CategoryDto = new CategoryDto();
+
   id : number;
   p : number=1;
   searchText;
 
   constructor(private categoryService: CategoryService,
               private dialog: MatDialog,
-              private router: Router){}
+              private router: Router,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef:MatDialogRef<CreateCategoryComponent>,
+  ){}
 
   ngOnInit(): void {
-    this.getCategories();
-    this.getCategoryDTOs();
+    this.getListCategoryDTOs();
   }
 
-  public getCategories(): void {
-    this.categoryService.getCategories().subscribe(
-      (response: Category[]) => {
-        this.categoryListDTO = response;
-     //   console.log(this.categories[0].idCategory);
-        console.log(this.categories);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  public getCategoryDTOs(): void {
+  public getListCategoryDTOs(): void {
     this.categoryService.getCategoryDTOs().subscribe(
       (response: CategoryDto[]) => {
         this.categoryListDTO = response;
-     //   console.log(this.categories[0].idCategory);
         console.log(this.categoryListDTO);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-  }
-
-  public onCreateCategory() {
-    this.router.navigate(['/newCategorie']);
   }
 
   onAddCategorie() {
@@ -71,27 +58,39 @@ export class ListCategoryComponent implements OnInit {
       width : "50%",
       data: data
     } );
-
     dialogRef.afterClosed().subscribe(result => {
       if(result && data == null){
-        this.categories.push(result);
+        this.categoryListDTO.push(result);
       }
       // this.refreshData();
     });
   }
 
-  addEditCategorie(i) {
+  addEditCategory(catId?: number) {
+   /*  const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    dialogConfig.data = {
+      catId
+    };
+    this.dialog.open(CreateCategoryComponent, dialogConfig); */
 
   }
-  public onDeleteCategory(categoryId: number): void {
-    this.categoryService.deleteCategory(categoryId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getCategories();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+  public onDeleteCategory(cat: CategoryDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.categoryService.deleteCategoryDto(cat.id).subscribe(data => {
+          this.toastr.warning('Category supprimé avec succès!');
+          this.categoryListDTO = this.categoryListDTO.filter(u => u !== cat);
+          this.getListCategoryDTOs();
+        });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
 

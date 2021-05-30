@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from './../../services/dialog.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ClientService } from './../../services/client.service';
@@ -12,30 +14,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListClientComponent implements OnInit {
 
-  clientList: Client[];
-  clientListDTO: ClientDto[];
-  editClient: Client;
-  deleteClient: Client;
+  clientDTOList: ClientDto[];
+  deleteClientDTO: ClientDto;
 
   id : number;
   p : number=1;
   searchText;
 
-
-  constructor(private cltService: ClientService,
+  constructor(private clientService: ClientService,
+              private router: Router,
               private dialog: MatDialog,
-              private router: Router){}
+              public toastr: ToastrService,
+              private dialogService: DialogService
+  ){}
 
   ngOnInit(): void {
-    this.getListClients();
-    this.getListClientDTOs();
+    this.getListClientDtos();
   }
 
-  public getListClientDTOs() {
-    this.cltService.getClientDTOs().subscribe(
+  public getListClientDtos(): void {
+    this.clientService.getClientDTOs().subscribe(
       (response: ClientDto[]) => {
-        this.clientListDTO = response;
-        console.log(this.clientListDTO);
+        this.clientDTOList = response;
+        console.log(this.clientDTOList);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -43,30 +44,20 @@ export class ListClientComponent implements OnInit {
     );
   }
 
-  public getListClients(): void {
-    this.cltService.getClients().subscribe(
-      (response: Client[]) => {
-        this.clientList = response;
-        console.log(this.clientList);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+   public onDeleteClient(client: ClientDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.clientService.deleteClientDTO(client.id).subscribe(data => {
+          this.toastr.warning('Client supprimé avec succès!');
+          this.clientDTOList = this.clientDTOList.filter(u => u !== client);
+          this.getListClientDtos();
+        });
       }
-    );
-  }
-
-  addEditClient(i) {
-
-  }
-  public onDeleteClient(cltId: number): void {
-    this.cltService.deleteClientDTO(cltId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getListClientDTOs();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
 

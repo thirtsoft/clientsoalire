@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+
 import { SharedRoutingModule } from './shared-routing.module';
-import { MatedialogComponent } from './matedialog/matedialog.component';
+
+import { MatDialogModule, MatDialogRef, } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -13,13 +17,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 
-import { BackendFooterComponent } from './backend-footer/backend-footer.component';
-import { BackendSidebarComponent } from './backend-sidebar/backend-sidebar.component';
-import { BackendHeaderComponent } from './backend-header/backend-header.component';
-import { FooterComponent } from './footer/footer.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { BackendFooterComponent } from './../shared/backend-footer/backend-footer.component';
+import { BackendSidebarComponent } from './../shared/backend-sidebar/backend-sidebar.component';
+import { BackendHeaderComponent } from './../shared/backend-header/backend-header.component';
+import { FooterComponent } from './../shared/footer/footer.component';
+import { SidebarComponent } from './../shared/sidebar/sidebar.component';
+import { HeaderComponent } from './../shared/header/header.component';
+import { MatdialogComponent } from './matdialog/matdialog.component';
 
 
 
@@ -31,18 +35,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     BackendHeaderComponent,
     BackendSidebarComponent,
     BackendFooterComponent,
-    MatedialogComponent,
-    NavbarComponent,
+    MatdialogComponent,
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
-    NavbarComponent,
     FooterComponent,
     BackendHeaderComponent,
     BackendSidebarComponent,
     BackendFooterComponent,
-    MatedialogComponent,
   ],
 
   imports: [
@@ -56,6 +57,22 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatSnackBarModule,
     MatCardModule,
     MatExpansionModule,
-  ]
+    ToastrModule.forRoot(),
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule
+  ],
+  providers: [
+    DatePipe,
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {} ,
+    },
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+
+  ],
 })
 export class SharedModule { }

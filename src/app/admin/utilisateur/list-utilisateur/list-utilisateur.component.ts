@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { DialogService } from './../../../services/dialog.service';
 import { CreateUtilisateurComponent } from './../create-utilisateur/create-utilisateur.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -13,43 +15,29 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListUtilisateurComponent implements OnInit {
 
-  utilisateurList: Utilisateur[];
-  utilisateurListDTO: UtilisateurDto[];
-  editUtilisateur: Utilisateur;
-  deleteUtilisateur: Utilisateur;
+  utilisateurDTOList: UtilisateurDto[];
+  deleteUtilisateurDTO: UtilisateurDto;
 
   id : number;
   p : number=1;
   searchText;
 
-
   constructor(private userService: UtilisateurService,
-              private dialog:MatDialog,
-              private router: Router){}
+              private router: Router,
+               private dialog: MatDialog,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              ){}
 
   ngOnInit(): void {
-    this.getlistUtilisateurs();
-    this.getListUtilisateurDTO();
+    this.getUtilisateurDTOs();
   }
 
-  public getListUtilisateurDTO() {
+  public getUtilisateurDTOs(): void {
     this.userService.getUtilisateurDTOs().subscribe(
       (response: UtilisateurDto[]) => {
-        this.utilisateurListDTO = response;
-        console.log(this.utilisateurListDTO);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-
-  }
-
-  public getlistUtilisateurs(): void {
-    this.userService.getUtilisateurs().subscribe(
-      (response: Utilisateur[]) => {
-        this.utilisateurList = response;
-        console.log(this.utilisateurList);
+        this.utilisateurDTOList = response;
+        console.log(this.utilisateurDTOList);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -72,25 +60,27 @@ export class ListUtilisateurComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result && data == null){
-        this.utilisateurList.push(result);
+        this.utilisateurDTOList.push(result);
       }
       // this.refreshData();
     });
   }
 
-
-  addEditUtilisateur(i) {
-
-  }
-  public onDeleteUtilisateur(userId: number): void {
-    this.userService.deleteUtilisateurDTO(userId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getListUtilisateurDTO();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+  public onDeleteUtilisateur(user: UtilisateurDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.userService.deleteUtilisateurDTO(user.id).subscribe(data => {
+          this.toastr.warning('Utilisateur supprimé avec succès!');
+          this.utilisateurDTOList = this.utilisateurDTOList.filter(u => u !== user);
+          this.getUtilisateurDTOs();
+        });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
     );
   }
+
 }

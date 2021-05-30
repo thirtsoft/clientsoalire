@@ -1,5 +1,5 @@
-import { Commande } from './commande';
-import { Article } from './article';
+import { Commande, CommandeDto } from './commande';
+import { Article, ArticleDto } from './article';
 export class LigneCommande {
   id: number;
   numero: number;
@@ -10,3 +10,15 @@ export class LigneCommande {
 
   article: Article;
 }
+
+export class LigneCommandeDto {
+  id: number;
+  numero: number;
+  price: number;
+  quantity: number;
+
+  commandeDto: CommandeDto;
+
+  articleDto: ArticleDto;
+}
+

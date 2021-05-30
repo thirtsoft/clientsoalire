@@ -3,7 +3,9 @@
 
     <div class="row">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
-
+        <!--
+        <button _ngcontent-roy-c3="" class="btn-meeting" type="submit" style="margin-left: 5%; width: 30%;" (click)="onCreateFournisseur()">Add fournisseur</button>
+ -->
     </div>
 
     <table class="table table-striped">
@@ -13,25 +15,25 @@
                 <th>Reference</th>
                 <th>FirstName</th>
                 <th>LastName</th>
-                <th>Phone</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let cltDTO of clientListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{cltDTO?.reference}}</td>
-                <td>{{cltDTO?.firstName}}</td>
-                <td>{{cltDTO?.lastName}}</td>
-                <td>{{cltDTO?.phoneClient}}</td>
-                <td>{{cltDTO?.email}}</td>
+            <tr *ngFor="let clientDTO of clientDTOList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <td>{{clientDTO?.reference}}</td>
+                <td>{{clientDTO?.firstName}}</td>
+                <td>{{clientDTO?.lastName}}</td>
+                <td>{{clientDTO?.email}}</td>
+                <td>{{clientDTO?.phoneClient}}</td>
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditClient(cltDTO) ">
+                        <!--   <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(categoryDTO) ">
                           <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteClient(cltDTO)">
+                        </button> -->
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteClient(clientDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

@@ -1,10 +1,13 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ArticleService } from './../../../services/article.service';
 import { ScategoryService } from './../../../services/scategory.service';
-import { Router } from '@angular/router';
-import { Scategory } from './../../../models/scategory';
-import { Article } from './../../../models/article';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ScategoryDto } from './../../../models/scategory';
+import { ArticleDto } from './../../../models/article';
 
 @Component({
   selector: 'app-create-article',
@@ -13,23 +16,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateArticleComponent implements OnInit {
 
-  public editArticle: Article = new Article();
-  public deleteArticle: Article;
-  listScategorie: Scategory[];
+  addEditArticleDTO: ArticleDto = new ArticleDto();
+  deleteArticleDTO: ArticleDto;
+  scategoryListDTO: ScategoryDto[];
 
   constructor(private articleService: ArticleService,
               private scategorieService: ScategoryService,
-              private router: Router){}
+              private router: Router,
+              private toastr: ToastrService,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateArticleComponent>
+  ){}
 
   ngOnInit(): void {
-    this.getListScategories();
+    this.getListScategoryDTOs();
 
   }
 
-  getListScategories() {
-    this.scategorieService.getScategories().subscribe(
-      (response: Scategory[]) => {
-        this.listScategorie = response;
+  getListScategoryDTOs() {
+    this.scategorieService.getScategoryDTOs().subscribe(
+      (response: ScategoryDto[]) => {
+        this.scategoryListDTO = response;
       }, (error: HttpErrorResponse) => {
         alert(error.message);
       }
@@ -37,10 +44,11 @@ export class CreateArticleComponent implements OnInit {
   }
 
   public onAddArticle() {
-    this.articleService.addArticle(this.editArticle).subscribe(
-      (response: Article) => {
-       console.log("Add Article successfully");
-        this.router.navigate(['/articles']);
+    this.articleService.addArticleDto(this.addEditArticleDTO).subscribe(
+      (response: ArticleDto) => {
+        this.dialogRef.close();
+        this.toastr.success("Article Ajouté avec Succès");
+        this.router.navigate(['/backend/admin/articles']);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -51,6 +59,5 @@ export class CreateArticleComponent implements OnInit {
   addEditArticle() {
 
   }
-
 
 }

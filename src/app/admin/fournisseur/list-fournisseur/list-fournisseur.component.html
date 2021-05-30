@@ -4,8 +4,7 @@
     <div class="row">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
 
-        <button _ngcontent-roy-c3="" class="btn-meeting" type="submit" style="margin-left: 5%; width: 30%;" (click)="onAddFournisseur()">Add fournisseur</button>
-
+        <button _ngcontent-roy-c3="" class="btn-meeting" type="submit" style="margin-left: 5%; width: 30%;" (click)="onCreateFournisseur()">Add fournisseur</button>
 
     </div>
 
@@ -13,36 +12,38 @@
 
         <thead class="thead-inverse">
             <tr>
-                <th>Reference</th>
+                <!-- <th>Reference</th> -->
                 <th>Article</th>
-                <th>FirstName</th>
-                <th>lastName</th>
-                <th>Address</th>
-                <th>Phone</th>
+                <th>Fournisseur</th>
+                <!-- <th>Nom</th> -->
+                <th>Addresse</th>
+                <th>Telephone</th>
                 <th>Email</th>
                 <th>City</th>
-                <th>Country</th>
+                <th>Town</th>
+                 <th>Rue</th>
                 <th>Action</th>
             </tr>
         </thead>
+ 
         <tbody>
-            <tr *ngFor="let fourDTO of fournisseurListDTO | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
-                <td>{{fourDTO?.reference}}</td>
-                <td>{{fourDTO?.articleDto.reference}} {{fourDTO?.articleDto?.designation}}</td>
-                <td>{{fourDTO?.firstName}}</td>
-                <td>{{fourDTO?.lastName}}</td>
+            <tr *ngFor="let fourDTO of fournisseurDTOList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
+                <!--  <td>{{fourDTO?.reference}}</td> -->
+                <td>{{fourDTO?.articleDto.designation}}</td>
+                <td>{{fourDTO?.firstName}} {{fourDTO?.lastName}}</td>
+                <!-- <td>{{fourDTO?.lastName}}</td> -->
                 <td>{{fourDTO?.address}}</td>
-                <td>{{fourDTO?.telephoneFournisseur}}</td>
+                <td>{{fourDTO?.telephone}}</td>
                 <td>{{fourDTO?.email}}</td>
                 <td>{{fourDTO?.city}}</td>
-                <td>{{fourDTO?.country}}</td>
-
+                <td>{{fourDTO?.town}}</td>
+                 <td>{{fourDTO?.rue}}</td>
                 <td>
                     <div class="container ">
                         <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(fourDTO) ">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteFournisseur(fourDTO)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteForunisseur(fourDTO)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

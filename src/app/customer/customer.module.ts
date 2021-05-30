@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CustomerRoutingModule } from './customer-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddNoteComponent } from './notification/add-note/add-note.component';
 import { ListNoteComponent } from './notification/list-note/list-note.component';
@@ -13,10 +16,8 @@ import { BillingAddressComponent } from './billing-address/billing-address.compo
 import { HistoriqueCommandeComponent } from './commande/historique-commande/historique-commande.component';
 import { AddCommandeComponent } from './commande/add-commande/add-commande.component';
 import { HomeComponent } from './home/home.component';
-import { CustomerRoutingModule } from './customer-routing.module';
 import { ListAddressComponent } from './address/list-address/list-address.component';
 import { CustomerComponent } from './customer/customer.component';
-import { SharedModule } from '..//shared/shared.module';
 import { ShopListComponent } from './shop-list/shop-list.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { AccountOrderComponent } from './account-order/account-order.component';

@@ -1,3 +1,6 @@
+import { FormBuilder } from '@angular/forms';
+import { DialogService } from './../../../services/dialog.service';
+import { ToastrService } from 'ngx-toastr';
 import { ScategoryService } from './../../../services/scategory.service';
 import { CategoryService } from './../../../services/category.service';
 import { Router } from '@angular/router';
@@ -15,42 +18,31 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ListScategoryComponent implements OnInit {
 
-  public scategories: Scategory[];
-  public editScategory: Scategory;
-  public deleteScategory: Scategory;
-
   scategoryListDTO: ScategoryDto[];
+  addEditscategoryDTO: ScategoryDto;
+  deletescategoryDTO: ScategoryDto;
+
   id : number;
   p : number=1;
   searchText;
 
-
   constructor(private scategorieService: ScategoryService,
-              private dialog:MatDialog,
-              private router: Router){}
+              private dialog: MatDialog,
+              private router: Router,
+              public toastr: ToastrService,
+              private dialogService: DialogService,
+              private fb: FormBuilder
+  ){}
 
   ngOnInit(): void {
-    this.getScategories();
-    this.getScategoryDTOList();
+    this.getScategoryDTOs();
   }
 
-  public getScategoryDTOList(): void {
+  public getScategoryDTOs(): void {
     this.scategorieService.getScategoryDTOs().subscribe(
       (response: ScategoryDto[]) => {
         this.scategoryListDTO = response;
         console.log(this.scategoryListDTO);
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  public getScategories(): void {
-    this.scategorieService.getScategories().subscribe(
-      (response: Scategory[]) => {
-        this.scategories = response;
-        console.log(this.scategories);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -72,30 +64,49 @@ export class ListScategoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result && data == null){
-        this.scategories.push(result);
+        this.scategoryListDTO.push(result);
       }
       // this.refreshData();
     });
   }
 
-  public onCreateScayegorie() {
-    this.router.navigate(['/newScategorie']);
+  addEditScategorie(item: ScategoryDto) {
+ /*    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    const dialog = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width="50%";
+    this.dialog.open(AddScategoryComponent, dialogConfig); */
   }
 
-  addEditScategorie(i) {
-
+  onDeleteScategorie(scatetgory: ScategoryDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    .afterClosed().subscribe((response: any) =>{
+      if(response){
+        this.scategorieService.deleteScategoryDTO(scatetgory.id).subscribe(data => {
+          this.toastr.warning('Scategory supprimé avec succès!');
+//          this.scategoryListDTO = this.scategoryListDTO.filter(u => u !== scatetgory);
+          this.getScategoryDTOs();
+        });
+      }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
-  public onDeleteScategorie(scategorieId: number): void {
-    this.scategorieService.deleteScategoryDTO(scategorieId).subscribe(
+
+ /*  public onDeleteScategorie(scategorieId: number): void {
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+    this.scategorieService.deleteScategoryDto(scategorieId).subscribe(
       (response: void) => {
         console.log(response);
-        this.getScategoryDTOList();
+        this.getScategoryDTOs();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
-  }
-
+  } */
 
 }

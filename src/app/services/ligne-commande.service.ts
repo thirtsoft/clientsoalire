@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { LigneCommande } from './../models/ligne-commande';
+import { LigneCommande, LigneCommandeDto } from './../models/ligne-commande';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -33,5 +33,27 @@ export class LigneCommandeService {
   public deleteLigneCommande(ligneCommandeId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/ligneCommandes/delete/${ligneCommandeId}`);
   }
+
+  /************************ LigneCommandeDTO ***************/
+  public getLigneCommandeDTOs(): Observable<LigneCommandeDto[]> {
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/ligneCommandes/all`);
+  }
+
+  public getLigneCommandeDTOById(ligneCommandeId: number): Observable<LigneCommandeDto> {
+    return this.http.get<LigneCommandeDto>(`${this.apiServerUrl}/ligneCommandes/${ligneCommandeId}`);
+  }
+
+  public addLigneCommandeDTO(ligneCommandeDTO: LigneCommandeDto): Observable<LigneCommandeDto> {
+    return this.http.post<LigneCommandeDto>(`${this.apiServerUrl}/ligneCommandes/create`, ligneCommandeDTO);
+  }
+
+  public updateLigneCommandeDTO(ligneCommandeDTO: LigneCommandeDto): Observable<LigneCommandeDto> {
+    return this.http.put<LigneCommandeDto>(`${this.apiServerUrl}/ligneCommandes/create`, ligneCommandeDTO);
+  }
+
+  public deleteLigneCommandeDTO(ligneCommandeId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/ligneCommandes/delete/${ligneCommandeId}`);
+  }
+
 
 }

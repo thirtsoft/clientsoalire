@@ -1,15 +1,45 @@
 <div>
-    <section id="container">
+    <div id="container">
         <app-backend-header></app-backend-header>
         <app-backend-sidebar></app-backend-sidebar>
-        <section id="main-content">
-            <section class="wrapper">
+        <div id="main-content">
+            <div class="">
 
-                <div class="container-fluid">
+               
                     <router-outlet></router-outlet>
-                </div>
-            </section>
-        </section>
+                
+            </div>
+        </div>
         <app-backend-footer></app-backend-footer>
-    </section>
-</div>
+    </div>
+</div> 
+
+<!-- <div id="wrapper">
+    <app-backend-header></app-backend-header>
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <app-backend-sidebar></app-backend-sidebar>
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <app-backend-footer></app-backend-footer>
+    </div>
+</div> -->
+
+
+<!-- <div>
+    <app-backend-header></app-backend-header>
+
+    <app-backend-sidebar></app-backend-sidebar>
+
+
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+
+    <app-backend-footer></app-backend-footer>
+
+</div> -->

@@ -1,10 +1,12 @@
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { FournisseurService } from './../../../services/fournisseur.service';
 import { ArticleService } from './../../../services/article.service';
 import { Router } from '@angular/router';
-import { Article } from './../../../models/article';
-import { Fournisseur } from './../../../models/fournisseur';
+import { Article, ArticleDto } from './../../../models/article';
+import { Fournisseur, FournisseurDto } from './../../../models/fournisseur';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-create-fournisseur',
@@ -13,23 +15,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateFournisseurComponent implements OnInit {
 
-  public formDataFournisseur: Fournisseur = new Fournisseur();
-  public deleteFournisseur: Fournisseur;
-  listArticleData: Article[];
+  formDataFournisseurDTO: FournisseurDto = new FournisseurDto();
+  deleteFournisseurDTO: FournisseurDto;
+  ListArticleDTO: ArticleDto[];
 
   constructor(private fournisseurService: FournisseurService,
               private articleService: ArticleService,
-              private router: Router){}
+              private router: Router,
+              private toastr: ToastrService,
+              @Inject(MAT_DIALOG_DATA)  public data,
+              public dialogRef:MatDialogRef<CreateFournisseurComponent>
+  ){}
 
   ngOnInit(): void {
-    this.getListArticles();
+    this.getListArticleDTOs();
 
   }
 
-  getListArticles() {
-    this.articleService.getArticles().subscribe(
-      (response: Article[]) => {
-        this.listArticleData = response;
+  public getListArticleDTOs(): void {
+    this.articleService.getArticleDTOs().subscribe(
+      (response: ArticleDto[]) => {
+        this.ListArticleDTO = response;
       }, (error: HttpErrorResponse) => {
         alert(error.message);
       }
@@ -37,10 +43,11 @@ export class CreateFournisseurComponent implements OnInit {
   }
 
   public onAddFournisseur() {
-    this.fournisseurService.addFournisseur(this.formDataFournisseur).subscribe(
-      (response: Fournisseur) => {
-       console.log("Add Fournisseur successfully");
-        this.router.navigate(['/fournisseurs']);
+    this.fournisseurService.addFournisseurDTO(this.formDataFournisseurDTO).subscribe(
+      (response: FournisseurDto) => {
+        this.dialogRef.close();
+        this.toastr.success("Fournisseur Ajouté avec Succès");
+        this.router.navigate(['/backend/admin/fournisseurs']);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -51,5 +58,4 @@ export class CreateFournisseurComponent implements OnInit {
   addEditArticle() {
 
   }
-
 }
