@@ -1,3 +1,6 @@
+import { SingleProductComponent } from './single-product/single-product.component';
+import { ContactComponent } from './contact/contact.component';
+import { FaqComponent } from './faq/faq.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { AccountOrderComponent } from './account-order/account-order.component';
 import { NgModule } from '@angular/core';
@@ -22,10 +25,10 @@ import { ShopListComponent } from './shop-list/shop-list.component';
 
 
 const routes: Routes = [
-  /* {
+  {
     path: '',
     component: HomeComponent
-  }, */
+  },
   {
     path: 'commande',
     component: AddCommandeComponent
@@ -64,7 +67,7 @@ const routes: Routes = [
   },
   {
     path: 'single-Product',
-    component: ShopListComponent
+    component: SingleProductComponent
   },
   {
     path: 'shop',
@@ -94,6 +97,14 @@ const routes: Routes = [
   {
     path: 'addNotification',
     component: AddNoteComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
+    path: 'faq',
+    component: FaqComponent
   },
   {
     path: '404',

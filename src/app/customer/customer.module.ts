@@ -22,6 +22,20 @@ import { ShopListComponent } from './shop-list/shop-list.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { AccountOrderComponent } from './account-order/account-order.component';
 import { WishListComponent } from './wish-list/wish-list.component';
+import { FaqComponent } from './faq/faq.component';
+import { FeatureProductComponent } from './feature-product/feature-product.component';
+import { FeatureComponent } from './feature/feature.component';
+import { BrandCategoryComponent } from './brand-category/brand-category.component';
+import { CategoryComponent } from './category/category.component';
+import { DealWeekComponent } from './deal-week/deal-week.component';
+import { InstagramComponent } from './instagram/instagram.component';
+import { BlogComponent } from './blog/blog.component';
+import { DelivreComponent } from './delivre/delivre.component';
+import { PartnaireComponent } from './partnaire/partnaire.component';
+import { SearchComponent } from './search/search.component';
+import { MainBodyComponent } from './main-body/main-body.component';
+import { ReseauComponent } from './reseau/reseau.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -46,13 +60,27 @@ import { WishListComponent } from './wish-list/wish-list.component';
     ShopListComponent,
     SingleProductComponent,
     AccountOrderComponent,
-    WishListComponent
+    WishListComponent,
+    FaqComponent,
+    FeatureProductComponent,
+    FeatureComponent,
+    BrandCategoryComponent,
+    CategoryComponent,
+    DealWeekComponent,
+    InstagramComponent,
+    BlogComponent,
+    DelivreComponent,
+    PartnaireComponent,
+    SearchComponent,
+    MainBodyComponent,
+    ReseauComponent,
+    ContactComponent
   ],
 
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    SharedModule,
+    SharedModule
   ]
 })
 export class CustomerModule { }

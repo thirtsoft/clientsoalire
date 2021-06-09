@@ -10,16 +10,16 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
 import { AccueilComponent } from './layouts/accueil/accueil.component';
 
 const routes: Routes = [
-  {
+ /*  {
     path: '',
     component: AccueilComponent
-  },
+  }, */
   {
     path: 'shop-categories',
     component: CategoriesComponent
   },
   {
-    path: 'home',
+    path: '',
     component: DefaultLayoutComponent,
     children: DEFAULT_ROUTES
   },

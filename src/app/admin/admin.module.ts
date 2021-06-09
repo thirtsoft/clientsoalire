@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
-
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+
 import { SharedModule } from '../shared/shared.module';
 
 import { FlexLayoutModule } from "@angular/flex-layout";

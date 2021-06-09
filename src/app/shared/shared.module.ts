@@ -24,6 +24,10 @@ import { FooterComponent } from './../shared/footer/footer.component';
 import { SidebarComponent } from './../shared/sidebar/sidebar.component';
 import { HeaderComponent } from './../shared/header/header.component';
 import { MatdialogComponent } from './matdialog/matdialog.component';
+import { NavbarComponent } from './../shared/navbar/navbar.component';
+import { FooterBottomComponent } from './footer-bottom/footer-bottom.component';
+import { MainFooterComponent } from './main-footer/main-footer.component';
+import { NewsletterComponent } from './newsletter/newsletter.component';
 
 
 
@@ -36,6 +40,10 @@ import { MatdialogComponent } from './matdialog/matdialog.component';
     BackendSidebarComponent,
     BackendFooterComponent,
     MatdialogComponent,
+    NavbarComponent,
+    FooterBottomComponent,
+    MainFooterComponent,
+    NewsletterComponent,
   ],
   exports: [
     HeaderComponent,
@@ -44,6 +52,12 @@ import { MatdialogComponent } from './matdialog/matdialog.component';
     BackendHeaderComponent,
     BackendSidebarComponent,
     BackendFooterComponent,
+    MatdialogComponent,
+    NavbarComponent,
+    FooterBottomComponent,
+    MainFooterComponent,
+    NewsletterComponent,
+
   ],
 
   imports: [
