@@ -28,10 +28,10 @@
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditScategorie(scategoryDTO) ">
+                        <button mat-raised-button class="action-button btn-primary" [routerLink]="['/backend/admin/scateorie', scategoryDTO.id]">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteScategorie(scategoryDTO)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteScategorie(scategoryDTO.id)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

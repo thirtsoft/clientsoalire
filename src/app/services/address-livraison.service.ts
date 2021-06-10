@@ -47,8 +47,8 @@ export class AddressLivraisonService {
     return this.http.post<AddressLivraisonDto>(`${this.apiServerUrl}/addresslivraisons/create`, addressLivraisonDTO);
   }
 
-  public updateAddressLivraisonDto(addressLivraisonDTO: AddressLivraisonDto): Observable<AddressLivraisonDto> {
-    return this.http.put<AddressLivraisonDto>(`${this.apiServerUrl}/addresslivraisons/create`, addressLivraisonDTO);
+  public updateAddressLivraisonDto(addressLivraisonId: number, addressLivraisonDTO: AddressLivraisonDto): Observable<AddressLivraisonDto> {
+    return this.http.put<AddressLivraisonDto>(`${this.apiServerUrl}/addresslivraisons/update/${addressLivraisonId}`, addressLivraisonDTO);
   }
 
   public deleteAddressLivraisonDto(addressLivraisonId: number): Observable<void> {

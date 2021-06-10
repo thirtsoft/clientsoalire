@@ -48,9 +48,10 @@ export class AddressClientService {
     return this.http.post<AddressClientDto>(`${this.apiServerUrl}/addresseclients/create`, addressClientDTO);
   }
 
-  public updateAddressClientDto(addressClientDTO: AddressClientDto): Observable<AddressClientDto> {
-    return this.http.put<AddressClientDto>(`${this.apiServerUrl}/addresseclients/create`, addressClientDTO);
+  public updateAddressClientDto(addressClientId: number, addressClientDTO: AddressClientDto): Observable<AddressClientDto> {
+    return this.http.put<AddressClientDto>(`${this.apiServerUrl}/addresseclients/update/${addressClientId}`, addressClientDTO);
   }
+
 
   public deleteAddressClientDto(addressClientId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/addresseclients/delete/${addressClientId}`);

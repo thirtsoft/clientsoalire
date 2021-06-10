@@ -1,4 +1,4 @@
-<form class="form-horizontal style-form" #addCategoryForm="ngForm">
+<form class="form-horizontal style-form" #addCategoryForm="ngForm" enctype="multipart/form-data">
     <input type="hidden" name="id" #id="ngModel" [(ngModel)]="addEditCategoryData.id">
     <div class="container">
         <div class="form-group">
@@ -24,41 +24,8 @@
 </form>
 
 <div class="click">
-    <button _ngcontent-roy-c3="" class="btn btn-success my-2 my-sm-0" type="submit" (click)="onAddCategory()">Save</button>
-    <!-- <button _ngcontent-roy-c3="" class="btn  my-2 my-sm-0" type="submit" (click)="onClose()">Cancel</button> -->
+    <button *ngIf="!paramId" class="btn btn-success my-2 my-sm-0" type="submit" (click)="onAddCategory()">Save</button>
+    <button *ngIf="paramId" class="btn btn-warning" (click)="onUpdateCategory()"><i class="fa fa-database"></i>Update</button>
     <button type="button" class="btn btn-danger ml-1"><i class="fa fa-close"></i> Close</button>
 
 </div>
-
-
-<!-- <div class="container">
-  <div class="col-md-8 col-md-offset-2">
-      <h1>Nouveau categorie</h1>
-      <form #addCategoryForm="ngForm" name="form" (ngSubmit)="onAddCategory()">
-          <!--  <input type="hidden" name="id" #idCategory="ngModel" [(ngModel)]="editCategory.idCategory"> -->
-<!--
-<div class="form-group col-sm-6">
-  <label>Code </label>
-  <input type="text" class="form-control" [(ngModel)]="editCategory.code" name="code" id="code" #code="ngModel" required>
-  <span class="text-danger" *ngIf="(code.touched || addCategoryForm.submitted) && code.errors?.required">
-          Code est obligatoire
-      </span>
-</div>
-
-<div class="form-group col-sm-6">
-  <label>Designation</label>
-  <input type="text" class="form-control" [(ngModel)]="editCategory.designation" name="designation" id="designation" #designation="ngModel" required>
-  <span class="text-danger" *ngIf="(designation.touched || addCategoryForm.submitted) && designation.errors?.required">
-        Désignation est obligatoire
-      </span>
-</div>
-
-<div class="form-group">
-  <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
-  <button type="button" class="btn btn-danger ml-1"><i class="fa fa-close"></i> Close</button>
-</div>
-
-</form>
-</div>
-</div>
--->

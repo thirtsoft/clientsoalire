@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DialogService } from './../../../services/dialog.service';
 import { ArticleService } from './../../../services/article.service';
 import { ArticleDto } from './../../../models/article';
-import { CreateArticleComponent } from './../create-article/create-article.component';
+
 
 @Component({
   selector: 'app-list-article',
@@ -48,6 +48,11 @@ export class ListArticleComponent implements OnInit {
   }
 
   onAddArticle() {
+    this.router.navigate(['/backend/admin/article']);
+  }
+
+/*
+  onAddArticle() {
     this.openNoteDialog(null);
   }
   openNoteDialog(data?: any){
@@ -62,21 +67,21 @@ export class ListArticleComponent implements OnInit {
       if(result && data == null){
         this.articleDTOList.push(result);
       }
-      // this.refreshData();
+     
     });
   }
 
-  addEditArticle(i) {
+  addEditArticle(i) {}
 
-  }
+*/
 
-   public onDeleteArticle(article: ArticleDto): void{
+   public onDeleteArticle(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.articleService.deleteArticleDto(article.id).subscribe(data => {
+        this.articleService.deleteArticleDto(id).subscribe(data => {
           this.toastr.warning('Article supprimé avec succès!');
-          this.articleDTOList = this.articleDTOList.filter(u => u !== article);
+        //  this.articleDTOList = this.articleDTOList.filter(u => u !== article);
           this.getListArticleDTOs();
         });
       }

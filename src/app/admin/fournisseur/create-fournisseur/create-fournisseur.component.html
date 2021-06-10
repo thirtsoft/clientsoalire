@@ -2,7 +2,7 @@
     <div class="row">
 
         <h1>Nouveau Fournisseur</h1>
-        <form #addFournisseurForm="ngForm" name="form" (ngSubmit)="onAddFournisseur()">
+        <form #addFournisseurForm="ngForm" name="form">
             <!--  <input type="hidden" name="id" #idCategory="ngModel" [(ngModel)]="formDataFournisseurDTO.idCategory"> -->
             <div class="row">
                 <div class="col-md-6">
@@ -92,7 +92,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+                    <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onAddFournisseur()"><i class="fa fa-database"></i> Submit</button>&nbsp;
+                    <button *ngIf="paramId" class="btn btn-warning" (click)="onUpdateFournisseur()"><i class="fa fa-database"></i>Update</button>
                     <button type="button" class="btn btn-danger ml-1"><i class="fa fa-close"></i> Close</button>
                 </div>
             </div>

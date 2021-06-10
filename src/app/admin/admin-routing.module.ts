@@ -1,5 +1,3 @@
-import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
-import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ListCategoryComponent } from './category/list-category/list-category.component';
@@ -16,27 +14,42 @@ import { ListLigneCommandeComponent } from './list-ligne-commande/list-ligne-com
 import { ListAddressClientComponent } from './list-address-client/list-address-client.component';
 import { ListAddressLivraisonComponent } from './list-address-livraison/list-address-livraison.component';
 import { ListNoteArticleComponent } from './list-note-article/list-note-article.component';
-
+import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
+import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
+import { DasboradComponent } from './dasborad/dasborad.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
- /*  {
+  {
     path: '',
-    component: AccueilComponent
-  }, */
+    component: DasboradComponent
+  }, 
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'categories',
     component: ListCategoryComponent
   },
   {
-    path: 'newCategorie',
+    path: 'categorie',
     component: CreateCategoryComponent
+  },
+   {
+    path:'categorie/:id',
+    component:CreateCategoryComponent
   },
   {
     path: 'scategories',
     component: ListScategoryComponent
   },
   {
-    path: 'newScategorie',
+    path: 'scategorie',
+    component: CreateScategoryComponent
+  },
+  {
+    path:'scategorie/:id',
     component: CreateScategoryComponent
   },
   {
@@ -44,7 +57,11 @@ const routes: Routes = [
     component: ListArticleComponent
   },
   {
-    path: 'newArticle',
+    path: 'article',
+    component: CreateArticleComponent
+  },
+  {
+    path:'article/:id',
     component: CreateArticleComponent
   },
   {
@@ -52,7 +69,11 @@ const routes: Routes = [
     component: ListFournisseurComponent
   },
   {
-    path: 'newFournisseur',
+    path: 'fournisseur',
+    component: CreateFournisseurComponent
+  },
+  {
+    path:'fournisseur/:id',
     component: CreateFournisseurComponent
   },
   {
@@ -84,9 +105,14 @@ const routes: Routes = [
     component: ListUtilisateurComponent
   },
   {
-    path: 'newUtilisateur',
+    path: 'utilisateur',
     component: CreateUtilisateurComponent
   },
+  {
+    path:'utilisateur/:id',
+    component: CreateUtilisateurComponent
+  },
+  
 
 ];
 

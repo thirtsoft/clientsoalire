@@ -21,11 +21,11 @@
                 <th>Email</th>
                 <th>City</th>
                 <th>Town</th>
-                 <th>Rue</th>
+                <th>Rue</th>
                 <th>Action</th>
             </tr>
         </thead>
- 
+
         <tbody>
             <tr *ngFor="let fourDTO of fournisseurDTOList | filter:searchText | paginate: {itemsPerPage: 4, currentPage: p} ">
                 <!--  <td>{{fourDTO?.reference}}</td> -->
@@ -37,13 +37,13 @@
                 <td>{{fourDTO?.email}}</td>
                 <td>{{fourDTO?.city}}</td>
                 <td>{{fourDTO?.town}}</td>
-                 <td>{{fourDTO?.rue}}</td>
+                <td>{{fourDTO?.rue}}</td>
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" (click)="addEditFournisseur(fourDTO) ">
+                        <button mat-raised-button class="action-button btn-primary" [routerLink]="['/backend/admin/categorie', fourDTO.id]">
                           <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteForunisseur(fourDTO)">
+                        <button mat-raised-button class="action-button btn-danger" (click)="onDeleteForunisseur(fourDTO.id)">
                           <mat-icon>delete_outline</mat-icon>
                         </button>
                     </div>

@@ -38,6 +38,9 @@ import { ListAddressLivraisonComponent } from './list-address-livraison/list-add
 import { AccueilComponent } from './accueil/accueil.component';
 import { CreateUtilisateurComponent } from './utilisateur/create-utilisateur/create-utilisateur.component';
 import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/create-fournisseur.component';
+import { DasboradComponent } from './dasborad/dasborad.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { CreateFournisseurComponent } from './fournisseur/create-fournisseur/cre
     ListCommandeComponent,
     ListLigneCommandeComponent,
     ListNoteArticleComponent,
-    AccueilComponent
+    AccueilComponent,
+    DasboradComponent,
+    LoginComponent,
+    RegisterComponent
   ],
 
   imports: [

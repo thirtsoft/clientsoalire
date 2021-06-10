@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { CategoryService } from './../../../services/category.service';
-import { Category, CategoryDto } from './../../../models/category';
-import { isNullOrUndefined } from 'util';
+import { CategoryDto } from './../../../models/category';
+
 
 
 @Component({
@@ -18,61 +18,46 @@ import { isNullOrUndefined } from 'util';
 export class CreateCategoryComponent implements OnInit {
 
   addEditCategoryData: CategoryDto = new CategoryDto();
-  deleteCategory: Category;
   listData: CategoryDto[];
   addCategoryForm: NgForm;
+
+  data;
+  paramId :any = 0;
+  Errors = {status:false, msg:''};
+  mySubscription: any;
 
   constructor(private categoryService: CategoryService,
               private router: Router,
               private toastr: ToastrService,
-              public fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA)  public data,
-              public dialogRef:MatDialogRef<CreateCategoryComponent>
+              public dialog: MatDialog,
+              private actRoute: ActivatedRoute,
   ){}
 
   ngOnInit(): void {
-   /*  if (!isNullOrUndefined(this.data.catId)) {
-      console.log(this.listData[this.data.catId]);
-      this.addEditCategoryData = Object.assign({},this.listData[this.data.catId])
-    } */
-  }
-  /*
-  onSubmit() {
-    if (isNullOrUndefined(this.data.catId)) {
-      this.categoryService.addCategoryDTO(this.addEditCategoryData).subscribe(
-        (response: CategoryDto) => {
-          this.dialogRef.close();
-          console.log("Category Ajouté");
-          this.toastr.success("Category Ajouté avec Succès");
-          this.router.navigate(['/backend/admin/categories']);
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
-
-    }else {
-      console.log(this.addEditCategoryData.id, this.addEditCategoryData);
-      this.categoryService.updateCategoryDTO(this.addEditCategoryData).subscribe(
-        (data: CategoryDto) => {
-          this.dialogRef.close();
-          this.dialogRef.close();
-          console.log("Modifiée Ajouté");
-          this.toastr.success("Category Modifiée avec Succès");
-          this.router.navigate(['/backend/admin/categories']);
-        },
-          (error: HttpErrorResponse) => {
-            alert(error.message);
-          }
-        );
+    this.paramId = this.actRoute.snapshot.paramMap.get('id');
+    console.log('Param--', this.paramId);
+    if(this.paramId  && this.paramId  > 0){
+      this.getCategoryDTOById(this.paramId);
     }
+  }
+
+  getCategoryDTOById(id: number) {
+    console.log('getOne');
+    this.categoryService.getCategoryDTOById(id).subscribe(
+      (response: CategoryDto) => {
+        console.log('data--', response);
+        this.addEditCategoryData = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
 
   }
-*/
-  onAddCategory() {
+   onAddCategory() {
     this.categoryService.addCategoryDTO(this.addEditCategoryData).subscribe(
       (response: CategoryDto) => {
-        this.dialogRef.close();
+  //      this.dialogRef.close();
         console.log("Category Ajouté");
         this.toastr.success("Category Ajouté avec Succès");
         this.router.navigate(['/backend/admin/categories']);
@@ -83,9 +68,21 @@ export class CreateCategoryComponent implements OnInit {
     );
   }
 
-  addEditCategorie() {
-
+  onUpdateCategory() {
+    this.categoryService.updateCategoryDTO(this.addEditCategoryData.id, this.addEditCategoryData).subscribe(
+      (response: CategoryDto) => {
+ //       this.dialogRef.close();
+        console.log("Category Ajouté");
+        this.toastr.warning("Category Update avec Succès");
+        this.router.navigate(['/backend/admin/categories']);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
+
+ 
 
 
 }

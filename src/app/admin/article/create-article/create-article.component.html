@@ -1,7 +1,7 @@
 <div class="container">
 
     <h1>Nouveau Article</h1>
-    <form #addArticleForm="ngForm" name="form" (ngSubmit)="onAddArticle()">
+    <form #addArticleForm="ngForm" name="form" enctype="multipart/form-data">
         <!--  <input type="hidden" name="id" #idCategory="ngModel" [(ngModel)]="editArticle.idCategory"> -->
         <div class="row">
             <div class="col-md-6">
@@ -41,10 +41,6 @@
 
             </div>
 
-
-
-
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label>CurrentPrice</label>
@@ -81,19 +77,24 @@
 
 
             </div>
-            <!--   <div class="form-group">
-              <label>Description</label>
-              <textarea type="text" class="form-control" cols="5" rows="3" name="description" id="description" [(ngModel)]="addEditArticleDTO.description" cols="30" rows="10" #description="ngModel" required>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea type="text" class="form-control" cols="5" rows="3" name="description" id="description" [(ngModel)]="addEditArticleDTO.description" cols="30" rows="10" #description="ngModel" required>
   </textarea>
-              <span class="text-danger" *ngIf="(description.touched || addArticleForm.submitted) && description.errors?.required">
+                    <span class="text-danger" *ngIf="(description.touched || addArticleForm.submitted) && description.errors?.required">
       Description est obligatoire
   </span>
-          </div> -->
+                </div>
 
+            </div>
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-success"><i class="fa fa-database"></i> Submit</button>&nbsp;
+            <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onAddArticle()">
+              <i class="fa fa-database"></i> Submit
+            </button>&nbsp;
+            <button *ngIf="paramId" class="btn btn-warning" (click)="onUpdateArticle()"><i class="fa fa-database"></i>Update</button>
             <button type="button" class="btn btn-danger ml-1"><i class="fa fa-close"></i> Close</button>
         </div>
 

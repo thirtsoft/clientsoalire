@@ -1,12 +1,13 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from './../../../services/dialog.service';
 import { ToastrService } from 'ngx-toastr';
-import { CreateFournisseurComponent } from './../create-fournisseur/create-fournisseur.component';
 import { MatDialog } from '@angular/material/dialog';
+
+import { CreateFournisseurComponent } from './../create-fournisseur/create-fournisseur.component';
 import { FournisseurService } from './../../../services/fournisseur.service';
 import { Router } from '@angular/router';
 import { Fournisseur, FournisseurDto } from './../../../models/fournisseur';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list-fournisseur',
@@ -28,7 +29,7 @@ export class ListFournisseurComponent implements OnInit {
               private dialog: MatDialog,
               private router: Router,
               public toastr: ToastrService,
-              private dialogService: DialogService
+              private dialogService: DialogService,
   ){}
 
   ngOnInit(): void {
@@ -48,9 +49,10 @@ export class ListFournisseurComponent implements OnInit {
   }
 
   onCreateFournisseur() {
-    this.openNoteDialog(null);
+    this.router.navigate(['/backend/admin/fournisseur']);
   }
 
+ /*
   openNoteDialog(data?: any){
     const dialogRef = this.dialog.open(CreateFournisseurComponent, {
       disableClose: true,
@@ -63,22 +65,19 @@ export class ListFournisseurComponent implements OnInit {
       if(result && data == null){
         this.fournisseurDTOList.push(result);
       }
-      // this.refreshData();
     });
   }
 
+  addEditFournisseur(i) {}
+  */
 
-  addEditFournisseur(i) {
-
-  }
-
-  public onDeleteForunisseur(four: FournisseurDto): void{
+  public onDeleteForunisseur(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.fournisseurService.deleteFournisseurDTO(four.id).subscribe(data => {
+        this.fournisseurService.deleteFournisseurDTO(id).subscribe(data => {
           this.toastr.warning('Fournisseur supprimé avec succès!');
-          this.fournisseurDTOList = this.fournisseurDTOList.filter(u => u !== four);
+//          this.fournisseurDTOList = this.fournisseurDTOList.filter(u => u !== four);
           this.getListFournisseurDTOs();
         });
       }

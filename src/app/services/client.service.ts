@@ -47,8 +47,8 @@ export class ClientService {
     return this.http.post<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
   }
 
-  public updateClientDTO(clientDTO: ClientDto): Observable<ClientDto> {
-    return this.http.put<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
+  public updateClientDTO(clientId: number, clientDTO: ClientDto): Observable<ClientDto> {
+    return this.http.put<ClientDto>(`${this.apiServerUrl}/categories/update/${clientId}`, clientDTO);
   }
 
   public deleteClientDTO(clientId: number): Observable<void> {

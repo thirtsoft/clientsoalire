@@ -66,7 +66,7 @@ const routes: Routes = [
     component: CheckoutComponent
   },
   {
-    path: 'single-Product',
+    path: 'product-detail/:slug',
     component: SingleProductComponent
   },
   {

@@ -28,6 +28,7 @@ import { NavbarComponent } from './../shared/navbar/navbar.component';
 import { FooterBottomComponent } from './footer-bottom/footer-bottom.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
+import { BackendNavbarComponent } from './backend-navbar/backend-navbar.component';
 
 
 
@@ -44,6 +45,7 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
     FooterBottomComponent,
     MainFooterComponent,
     NewsletterComponent,
+    BackendNavbarComponent,
   ],
   exports: [
     HeaderComponent,
@@ -57,6 +59,7 @@ import { NewsletterComponent } from './newsletter/newsletter.component';
     FooterBottomComponent,
     MainFooterComponent,
     NewsletterComponent,
+    BackendNavbarComponent,
 
   ],
 

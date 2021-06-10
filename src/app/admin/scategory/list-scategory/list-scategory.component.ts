@@ -4,9 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ScategoryService } from './../../../services/scategory.service';
 import { CategoryService } from './../../../services/category.service';
 import { Router } from '@angular/router';
-import { Category } from './../../../models/category';
-import { Scategory, ScategoryDto } from './../../../models/scategory';
-import { CreateScategoryComponent } from './../create-scategory/create-scategory.component';
+import { ScategoryDto } from './../../../models/scategory';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,7 +29,7 @@ export class ListScategoryComponent implements OnInit {
               private router: Router,
               public toastr: ToastrService,
               private dialogService: DialogService,
-              private fb: FormBuilder
+              
   ){}
 
   ngOnInit(): void {
@@ -51,6 +49,10 @@ export class ListScategoryComponent implements OnInit {
   }
 
   onAddScategorie() {
+    this.router.navigate(['/backend/admin/scategorie']);
+  }
+/*
+  onAddScategorie() {
     this.openNoteDialog(null);
   }
 
@@ -66,24 +68,18 @@ export class ListScategoryComponent implements OnInit {
       if(result && data == null){
         this.scategoryListDTO.push(result);
       }
-      // this.refreshData();
+      
     });
   }
 
-  addEditScategorie(item: ScategoryDto) {
- /*    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
-    const dialog = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.dialog.open(AddScategoryComponent, dialogConfig); */
-  }
+  addEditScategorie(item: ScategoryDto) {}
+  */
 
-  onDeleteScategorie(scatetgory: ScategoryDto): void{
+  onDeleteScategorie(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.scategorieService.deleteScategoryDTO(scatetgory.id).subscribe(data => {
+        this.scategorieService.deleteScategoryDTO(id).subscribe(data => {
           this.toastr.warning('Scategory supprimé avec succès!');
 //          this.scategoryListDTO = this.scategoryListDTO.filter(u => u !== scatetgory);
           this.getScategoryDTOs();

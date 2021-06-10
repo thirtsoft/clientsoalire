@@ -1,118 +1,153 @@
-<aside>
-
-    <div id="sidebar" class="nav-collapse nicescroll-rails" tabindex="5000" style="overflow-y: scroll;
-  outline: none; margin-left: 0px;
-  z-index: 1;
-  /* overflow-x: hidden; */
-
-  ">
-        <!-- *ngIf="isLoggedIn";-->
-
-        <!-- sidebar menu start-->
-        <ul class="sidebar-menu" id="nav-accordion">
-            <p class="centered">
-                <!--        <a><img src="http://localhost:8080/avatar/{{id}}" class="img-circle" width="80" routerLink="/profil" *ngIf="img"></a> -->
-                <a><img src="../../../assets/admin/img/avatar.jpg" class="img-circle" width="80" routerLink="/profil"></a>
-            </p>
-            <h5 class="centered">
-                <!-- <h2>{{username}}</h2> -->
-                <h2>tairou</h2>
-            </h5>
-
-            <li class="mt">
-                <a routerLink="/backend/dashboard">
-                    <i class="fa fa-tachometer" aria-hidden="true"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="mt">
-                <a routerLink="/backend/admin/categories">
-                    <i class="fa fa-book"></i>
-                    <span>Categories</span>
-                </a>
-            </li>
-            <li class="mt">
-                <a routerLink="/backend/admin/scategories">
-                    <i class="fa fa-book"></i>
-                    <span>Scategories</span>
-                </a>
-            </li>
-            <li class="" routerLinkActive="active">
-                <a routerLink="/backend/admin/articles">
-                    <i class="fa fa-group"></i>
-                    <span>Articles</span>
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/fournisseurs">
-                    <i class="fa fa-user"></i>
-                    <span>Fournisseurs</span>
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/clients">
-                    <i class="fa fa-user"></i>
-                    <span>Clients</span>
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/addresses">
-                    <i class="fa fa-user"></i>
-                    <span>Address Clients</span>
-
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/commandes">
-                    <i class="fa fa-user"></i>
-                    <span>Commandes</span>
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/livraisons">
-                    <i class="fa fa-user"></i>
-                    <span>Livraison</span>
-                </a>
-
-            </li>
-
-            <li class="dcjq-parent-li" routerLinkActive="active">
-                <a routerLink="/backend/admin/notifications">
-                    <i class="fa fa-bell"></i>
-                    <span>Notifications</span>
-                </a>
-
-            </li>
-
-            <mat-accordion class="sidebar" routerLinkActive="active">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title style="margin-left: -7%;margin-bottom: -3px;width: 30px;">
-                            <i class="fa fa-group"></i> <span style="margin-left: 7px;">Utilisateurs</span>
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-
-                    <div class="vacation-sub-menu">
-                        <li><a style="margin-bottom:-10px" routerLink="/backend/admin/utilisateurs"><i class="fa fa-book"></i> List Users </a></li>
-                        <li><a routerLink="/backend/admin/scategories"><i class="fa fa-group"></i>Signup</a></li>
-                        <li><a routerLink="/backend/admin/articles"><i class="fa fa-group"></i>Edit Profil</a></li>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
-
-
-
-        </ul>
-        <!-- sidebar menu end-->
-    </div>
-</aside>
+ <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label"></li>
+                     <!-- <li class="nav-label">Dashboard</li> -->
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" 
+                            routerLink="/backend/admin">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                       <!--  <ul aria-expanded="false">
+                            <li><a href="./index.html">Home 1</a></li>
+                            
+                        </ul> -->
+                    </li>
+                    <li class="mega-menu mega-menu-sm">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" 
+                            routerLink="/backend/admin/categories">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Categories</span>
+                        </a>
+                       <!--  <ul aria-expanded="false">
+                            <li><a href="./layout-blank.html">Blank</a></li>
+                            <li><a href="./layout-one-column.html">One Column</a></li>
+                            <li><a href="./layout-two-column.html">Two column</a></li>
+                            
+                        </ul> -->
+                    </li>
+                    <li class="nav-label" href="javascript:void()" routerLink="/backend/admin/scategories">Scategories</li>
+                    <!-- <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" 
+                            routerLink="backend/admin/scategories">
+                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./email-inbox.html">Inbox</a></li>
+                            <li><a href="./email-read.html">Read</a></li>
+                            <li><a href="./email-compose.html">Compose</a></li>
+                        </ul>
+                    </li> -->
+                    <li>
+                        <a class="has-arrow" aria-expanded="false"  href="javascript:void()"
+                            routerLink="/backend/admin/articles">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Articles</span>
+                        </a>
+                       
+                    </li>
+                    <li>
+                        <a class="has-arrow" aria-expanded="false"  href="javascript:void()"
+                            routerLink="/backend/admin/commandes">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Commandes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" aria-expanded="false" href="javascript:void()"
+                            routerLink="/backend/admin/detailsCommandes">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">DetailCommandes</span>
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a class="has-arrow" aria-expanded="false" href="javascript:void()"
+                            routerLink="/backend/admin/clients">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Clients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="has-arrow" aria-expanded="false"  href="javascript:void()"
+                            routerLink="/backend/admin/fournisseurs">
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Fournisseurs</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
+                        </a>
+                       <!--  <ul aria-expanded="false">
+                            <li><a href="./chart-flot.html">Flot</a></li>
+                            <li><a href="./chart-morris.html">Morris</a></li>
+                           
+                        </ul> -->
+                    </li>
+                    <li class="nav-label" routerLink="/backend/admin/addresses">Adresses</li>
+                    <li class="nav-label" routerLink="/backend/admin/livraisons">Addresse-Livraisons</li>
+                   <!--  <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false" 
+                            routerLink="/backend/admin/livraisons">
+                            <i class="icon-grid menu-icon"></i><span class="nav-text">Addresse-Livraisons</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./ui-accordion.html">Accordion</a></li>
+                            <li><a href="./ui-alert.html">Alert</a></li>
+                            <li><a href="./ui-badge.html">Badge</a></li>
+                            <li><a href="./ui-button.html">Button</a></li>
+                        </ul>
+                    </li> -->
+                     <li class="nav-label" routerLink="/backend/admin/livraisons">
+                        <i class="icon-badge menu-icon"></i>Notifications</li>
+                   <!--  <li>
+                        <a href="widgets.html" aria-expanded="false" 
+                            routerLink="/backend/admin/notifications">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Notifications</span>
+                        </a>
+                    </li> -->
+                    <li class="nav-label" routerLink="/backend/admin/utilisateurs">
+                        <i class="icon-badge menu-icon"></i>Utilisateurs</li>
+                    <li>
+                  <!--   <li class="nav-label" routerLink="/backend/admin/utilisateurs">Utilisateurs</li> -->
+                  <!--   <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./form-basic.html">Basic Form</a></li>
+                            <li><a href="./form-validation.html">Form Validation</a></li>
+                            <li><a href="./form-step.html">Step Form</a></li>
+                            <li><a href="./form-editor.html">Editor</a></li>
+                            <li><a href="./form-picker.html">Picker</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">Table</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
+                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-label">Pages</li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="./page-login.html">Login</a></li>
+                            <li><a href="./page-register.html">Register</a></li>
+                            <li><a href="./page-lock.html">Lock Screen</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="./page-error-404.html">Error 404</a></li>
+                                    <li><a href="./page-error-403.html">Error 403</a></li>
+                                    <li><a href="./page-error-400.html">Error 400</a></li>
+                                    <li><a href="./page-error-500.html">Error 500</a></li>
+                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
