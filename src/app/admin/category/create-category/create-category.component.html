@@ -1,31 +1,37 @@
-<form class="form-horizontal style-form" #addCategoryForm="ngForm" enctype="multipart/form-data">
-    <input type="hidden" name="id" #id="ngModel" [(ngModel)]="addEditCategoryData.id">
-    <div class="container">
-        <div class="form-group">
-            <label class="col-sm-2 col-sm-2 col-md-6 control-label">Code</label>
-            <div class="col-sm-10 col-md-6">
-                <input type="text" [(ngModel)]="addEditCategoryData.code" name="code" id="code" placeholder="code" #code="ngModel" required>
+<div class="container">
+
+    <h3>Nouveau Categorie</h3>
+    <form #addCategoryForm="ngForm" name="form" enctype="multipart/form-data" style="align-items: center;">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Code</label>
+                <!--  <div class="col-sm-10 col-md-6"> -->
+                <input type="text" class="form-control" [(ngModel)]="addEditCategoryData.code" name="code" id="code" placeholder="code" #code="ngModel" required>
                 <span class="text-danger" *ngIf="(code.touched || addCategoryForm.submitted) && code.errors?.required">
-            Code est obligatoire
+                Code est obligatoire
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Designation</label>
+                <!--  <div class="col-sm-10 col-md-6"> -->
+                <input type="text" class="form-control" [(ngModel)]="addEditCategoryData.designation" name="designation" id="designation" #designation="ngModel" placeholder="designation">
+                <span class="text-danger" *ngIf="(designation.touched || addCategoryForm.submitted) && designation.errors?.required">
+              Designation est obligatoire
         </span>
             </div>
         </div>
+
+
         <div class="form-group">
-            <label class="col-sm-2 col-sm-2 col-md-6 control-label">Designation</label>
-            <div class="col-sm-10 col-md-6">
-                <input type="text" [(ngModel)]="addEditCategoryData.designation" name="designation" id="designation" #designation="ngModel" placeholder="designation">
-                <span class="text-danger" *ngIf="(designation.touched || addCategoryForm.submitted) && designation.errors?.required">
-                Designation est obligatoire
-          </span>
-            </div>
+            <button *ngIf="!paramId " class="btn btn-success my-2 my-sm-0 " type="submit " (click)="onAddCategory() ">Save</button>
+            <button *ngIf="paramId " class="btn btn-warning " (click)="onUpdateCategory() "><i class="fa fa-database "></i>Update</button>
+            <button type="button " class="btn btn-danger ml-1 "><i class="fa fa-close "></i> Close</button>
         </div>
-    </div>
 
-</form>
-
-<div class="click">
-    <button *ngIf="!paramId" class="btn btn-success my-2 my-sm-0" type="submit" (click)="onAddCategory()">Save</button>
-    <button *ngIf="paramId" class="btn btn-warning" (click)="onUpdateCategory()"><i class="fa fa-database"></i>Update</button>
-    <button type="button" class="btn btn-danger ml-1"><i class="fa fa-close"></i> Close</button>
+    </form>
 
 </div>

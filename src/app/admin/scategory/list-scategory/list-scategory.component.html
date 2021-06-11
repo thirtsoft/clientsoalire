@@ -1,6 +1,7 @@
-<h3><i class="fa fa-angle-right"></i> List of scategories</h3>
-<div>
-
+<div class="container" style="margin-bottom: 70px;">
+    <div class="row">
+        <h3><i class="fa fa-angle-right"></i> List of scategories</h3>
+    </div>
     <div class="row">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
 
@@ -28,7 +29,7 @@
 
                 <td>
                     <div class="container ">
-                        <button mat-raised-button class="action-button btn-primary" [routerLink]="['/backend/admin/scateorie', scategoryDTO.id]">
+                        <button mat-raised-button class="action-button btn-primary" [routerLink]="['/backend/admin/scategorie', scategoryDTO.id]">
                           <mat-icon>edit</mat-icon>
                         </button>
                         <button mat-raised-button class="action-button btn-danger" (click)="onDeleteScategorie(scategoryDTO.id)">
@@ -44,4 +45,5 @@
     <div class="pagination ">
         <pagination-controls (pageChange)="p=$event"></pagination-controls>
     </div>
+
 </div>

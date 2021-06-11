@@ -18,7 +18,7 @@ export class CreateScategoryComponent implements OnInit {
 
   addEditScategoryDTO: ScategoryDto = new ScategoryDto();
   categoryListDTO: CategoryDto[];
-  
+
   paramId :any = 0;
 
   constructor(private scatService: ScategoryService,

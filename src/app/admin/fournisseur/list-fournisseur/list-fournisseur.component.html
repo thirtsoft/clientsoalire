@@ -1,5 +1,7 @@
-<h3><i class="fa fa-angle-right"></i> List of fournisseurs</h3>
-<div>
+<div class="container" style="margin-bottom: 70px;">
+    <div class="row">
+        <h3><i class="fa fa-angle-right"></i> List of fournisseurs</h3>
+    </div>
 
     <div class="row">
         <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
@@ -56,4 +58,5 @@
     <div class="pagination ">
         <pagination-controls (pageChange)="p=$event"></pagination-controls>
     </div>
+
 </div>
