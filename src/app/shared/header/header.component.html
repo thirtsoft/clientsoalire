@@ -3,22 +3,22 @@
         <div class="container">
             <div class="ht-left">
                 <div class="mail-service">
-                    <i class="fa fa-envelope"></i> hello.colorlib@gmail.com
+                    <i class="fa fa-envelope"></i> support@2cs.sn
                 </div>
                 <div class="phone-service">
-                    <i class="fa fa-phone"></i> +65 11.188.888
+                    <i class="fa fa-phone"></i> +221 77 715 15 14
                 </div>
             </div>
             <div class="ht-right">
-                <a routerLink="/auth/login" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                <!--  <a routerLink="/auth/login" class="login-panel"><i class="fa fa-user"></i>Login</a> -->
                 <div class="lan-selector">
                     <div class="ddOutOfVision" id="countries_msddHolder" style="height: 0px; overflow: hidden; position: absolute;">
-                        <select class="language_drop" name="countries" id="countries" style="width:300px;" tabindex="-1">
+                        <!--  <select class="language_drop" name="countries" id="countries" style="width:300px;" tabindex="-1">
                     <option value="yt" data-image="assets/customer/img/flag-1.jpg" data-imagecss="flag yt" data-title="English">English</option>
                     <option value="yu" data-image="assets/customer/img/flag-2.jpg" data-imagecss="flag yu" data-title="Bangladesh">German </option>
-                </select></div>
+                </select --></div>
                     <div class="dd ddcommon borderRadiusTp" id="countries_msdd" tabindex="0" style="width: 300px;">
-                        <div class="ddTitle borderRadiusTp">
+                        <!-- <div class="ddTitle borderRadiusTp">
                             <span class="divider"></span><span class="ddArrow arrowoff"></span>
                             <span class="ddTitleText " id="countries_title"><img src="assets/customer/img/flag-1.jpg" class="flag yt fnone"><span class="ddlabel">English</span>
                             <span class="description" style="display: none;"></span>
@@ -33,7 +33,7 @@
                                     <div class="clear"></div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="top-social">
@@ -84,8 +84,8 @@
                                         <tbody>
                                             <tr *ngFor="let item of cart.products; let i=index;">
                                                 <td class="si-pic">
-                                                  <!-- <img src="assets/customer/img/select-product-1.jpg" alt=""> -->
-                                                  <img src="assets/customer/img/products/{{item.pImageDefault}}" alt="Image"></td>
+                                                    <!-- <img src="assets/customer/img/select-product-1.jpg" alt=""> -->
+                                                    <img src="assets/customer/img/products/{{item.pImageDefault}}" alt="Image"></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
                                                         <p>${{item.pPrice}} x {{item.qty}}</p>
@@ -98,7 +98,7 @@
                                                     <i class="ti-close"></i>
                                                 </td>
                                             </tr>
-                                           <!--  <tr>
+                                            <!--  <tr>
                                                 <td class="si-pic"><img src="assets/customer/img/select-product-2.jpg" alt=""></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">

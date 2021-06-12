@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a href="./home.html"><i class="fa fa-home"></i> Home</a>
-                    <a href="./shop.html">Shop</a>
+                    <a routerLink="/"><i class="fa fa-home"></i> Home</a>
+                    <a routerLink="/shop">Shop</a>
                     <span>Shopping Cart</span>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                                 <td class="cart-pic first-row">
                                     <!-- <img src="assets/customer/img/cart-page/product-1.jpg" alt=""> -->
                                     <img src="assets/customer/img/products/{{item.data.pImageDefault}}" alt="Image">
-                                    </td>
+                                </td>
                                 <td class="cart-title first-row">
                                     <!-- <h5>Pure Pineapple</h5> -->
                                     <h5>{{item.data.pName}}</h5>
@@ -63,7 +63,7 @@
                                     </div>
                                 </td> -->
                                 <!-- <td class="total-price first-row">$60.00</td> -->
-                                <td class="total-price first-row">${{item.price * item.qty}}</td>                                   
+                                <td class="total-price first-row">${{item.price * item.qty}}</td>
                                 <td class="close-td first-row" (click)="removeCart(item.pId)"><i class="ti-close"></i></td>
                             </tr>
                             <!-- <tr>
@@ -85,7 +85,7 @@
                                             <input type="text" value="1">
                                         </div>
                                     </div>
-                                </td> 
+                                </td>
                                 <td class="total-price">$60.00</td>
                                 <td class="close-td"><i class="ti-close"></i></td>
                             </tr>
@@ -108,7 +108,7 @@
                                             <input type="text" value="1">
                                         </div>
                                     </div>
-                                </td> 
+                                </td>
                                 <td class="total-price">$60.00</td>
                                 <td class="close-td"><i class="ti-close"></i></td>
                             </tr> -->
@@ -135,7 +135,7 @@
                                 <li class="subtotal">Subtotal <span>$240.00</span></li>
                                 <li class="cart-total">Total <span>$240.00</span></li>
                             </ul>
-                            <a href="#" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                            <a routerLink="/checkout" class="proceed-btn">PROCEED TO CHECK OUT</a>
                         </div>
                     </div>
                 </div>

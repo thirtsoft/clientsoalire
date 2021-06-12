@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { FaqComponent } from './faq/faq.component';
@@ -101,6 +102,10 @@ const routes: Routes = [
   {
     path: 'contact',
     component: ContactComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'faq',

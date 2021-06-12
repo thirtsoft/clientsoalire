@@ -38,6 +38,7 @@ import { ReseauComponent } from './reseau/reseau.component';
 import { ContactComponent } from './contact/contact.component';
 import { CartContentComponent } from './cart-content/cart-content.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     ReseauComponent,
     ContactComponent,
     CartContentComponent,
-    CartItemComponent
+    CartItemComponent,
+    AboutComponent
   ],
 
   imports: [
