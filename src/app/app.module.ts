@@ -12,6 +12,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
 import { AccueilComponent } from './layouts/accueil/accueil.component';
 import { CategoriesComponent } from './layouts/categories/categories.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 declare var $: any;
 
@@ -32,6 +33,7 @@ declare var $: any;
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgbModule,
 
   ],
   providers: [],

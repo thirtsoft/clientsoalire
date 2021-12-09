@@ -29,6 +29,8 @@ import { FooterBottomComponent } from './footer-bottom/footer-bottom.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 import { NewsletterComponent } from './newsletter/newsletter.component';
 import { BackendNavbarComponent } from './backend-navbar/backend-navbar.component';
+import { NavMobileComponent } from './header/customer/top/nav-mobile/nav-mobile.component';
+import { NavDesktopComponent } from './header/customer/top/nav-desktop/nav-desktop.component';
 
 
 
@@ -46,6 +48,8 @@ import { BackendNavbarComponent } from './backend-navbar/backend-navbar.componen
     MainFooterComponent,
     NewsletterComponent,
     BackendNavbarComponent,
+    NavMobileComponent,
+    NavDesktopComponent,
   ],
   exports: [
     HeaderComponent,
