@@ -36,7 +36,7 @@ export class ListArticleComponent implements OnInit {
   }
 
   public getListArticleDTOs(): void {
-    this.articleService.getArticleDTOs().subscribe(
+    this.articleService.getArticleDTOsOrderByIdDesc().subscribe(
       (response: ArticleDto[]) => {
         this.articleDTOList = response;
         console.log(this.articleDTOList);
@@ -75,7 +75,7 @@ export class ListArticleComponent implements OnInit {
 
 */
 
-   public onDeleteArticle(id: number): void{
+  public onDeleteArticle(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){

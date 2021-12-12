@@ -42,7 +42,7 @@ export class CreateScategoryComponent implements OnInit {
 
   getScategoryDTOById(id: number) {
     console.log('getOne');
-    this.scatService.getScategoryDTOById(id).subscribe(
+    this.scatService.getScategoryDtoById(id).subscribe(
       (response: ScategoryDto) => {
         console.log('data--', response);
         this.addEditScategoryDTO = response;
@@ -53,6 +53,7 @@ export class CreateScategoryComponent implements OnInit {
     );
 
   }
+
   getListCategoryDTOs() {
     this.catService.getCategoryDTOs().subscribe(
       (response: CategoryDto[]) => {
@@ -64,7 +65,7 @@ export class CreateScategoryComponent implements OnInit {
   }
 
   public onAddScategory() {
-    this.scatService.addScategoryDTO(this.addEditScategoryDTO).subscribe(
+    this.scatService.addScategoryDto(this.addEditScategoryDTO).subscribe(
       (response: ScategoryDto) => {
     //    this.dialogRef.close();
         this.toastr.success("Scategory Ajouté avec Succès");
@@ -77,7 +78,7 @@ export class CreateScategoryComponent implements OnInit {
   }
 
   public onUpdateScategory() {
-    this.scatService.updateScategoryDTO(this.addEditScategoryDTO.id, this.addEditScategoryDTO).subscribe(
+    this.scatService.updateScategoryDto(this.addEditScategoryDTO.id, this.addEditScategoryDTO).subscribe(
       (response: ScategoryDto) => {
     //    this.dialogRef.close();
         this.toastr.warning("Scategory Update avec Succès");

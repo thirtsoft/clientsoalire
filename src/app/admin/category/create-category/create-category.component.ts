@@ -43,7 +43,7 @@ export class CreateCategoryComponent implements OnInit {
 
   getCategoryDTOById(id: number) {
     console.log('getOne');
-    this.categoryService.getCategoryDTOById(id).subscribe(
+    this.categoryService.getCategoryDtoById(id).subscribe(
       (response: CategoryDto) => {
         console.log('data--', response);
         this.addEditCategoryData = response;
@@ -54,8 +54,9 @@ export class CreateCategoryComponent implements OnInit {
     );
 
   }
-   onAddCategory() {
-    this.categoryService.addCategoryDTO(this.addEditCategoryData).subscribe(
+
+  onAddCategory() {
+    this.categoryService.addCategoryDto(this.addEditCategoryData).subscribe(
       (response: CategoryDto) => {
   //      this.dialogRef.close();
         console.log("Category Ajouté");
@@ -69,7 +70,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   onUpdateCategory() {
-    this.categoryService.updateCategoryDTO(this.addEditCategoryData.id, this.addEditCategoryData).subscribe(
+    this.categoryService.updateCategoryDto(this.addEditCategoryData.id, this.addEditCategoryData).subscribe(
       (response: CategoryDto) => {
  //       this.dialogRef.close();
         console.log("Category Ajouté");

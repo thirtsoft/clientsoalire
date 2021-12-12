@@ -46,7 +46,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   getListScategoryDTOs() {
-    this.scategorieService.getScategoryDTOs().subscribe(
+    this.scategorieService.getScategoryDtos().subscribe(
       (response: ScategoryDto[]) => {
         this.scategoryListDTO = response;
       }, (error: HttpErrorResponse) => {

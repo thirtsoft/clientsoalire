@@ -32,8 +32,8 @@ export class ListLigneCommandeComponent implements OnInit {
     this.getLigneCommandeDtos();
   }
 
-  public getLigneCommandeDtos(): void {
-    this.lcomService.getLigneCommandeDTOs().subscribe(
+  getLigneCommandeDtos(): void {
+    this.lcomService.getAllLigneCommandeDtosOrderByIdDesc().subscribe(
       (response: LigneCommandeDto[]) => {
         this.ligneCommandeDTOList = response;
         console.log(this.ligneCommandeDTOList);
@@ -44,12 +44,15 @@ export class ListLigneCommandeComponent implements OnInit {
     );
   }
 
-  public onDeleteligneCommande(lcom: LigneCommandeDto): void{
+  onDeleteligneCommande(lcom: LigneCommandeDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.lcomService.deleteLigneCommandeDTO(lcom.id).subscribe(data => {
-          this.toastr.warning('LigneCommande supprimé avec succès!');
+        this.lcomService.deleteLigneCommandeDto(lcom.id).subscribe(data => {
+          this.toastr.error('avec succès','LigneCommande supprimé', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
           this.ligneCommandeDTOList = this.ligneCommandeDTOList.filter(u => u !== lcom);
           this.getLigneCommandeDtos();
         });

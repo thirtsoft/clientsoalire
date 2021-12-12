@@ -33,7 +33,7 @@ export class ListCategoryComponent implements OnInit {
   }
 
   public getListCategoryDTOs(): void {
-    this.categoryService.getCategoryDTOs().subscribe(
+    this.categoryService.getCategorieDTOsOrderByIdDesc().subscribe(
       (response: CategoryDto[]) => {
         this.categoryListDTO = response;
         console.log(this.categoryListDTO);
@@ -63,7 +63,7 @@ export class ListCategoryComponent implements OnInit {
       if(result && data == null){
         this.categoryListDTO.push(result);
       }
-      
+
     });
   }
 

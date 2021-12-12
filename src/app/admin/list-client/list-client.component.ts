@@ -32,8 +32,8 @@ export class ListClientComponent implements OnInit {
     this.getListClientDtos();
   }
 
-  public getListClientDtos(): void {
-    this.clientService.getClientDTOs().subscribe(
+  getListClientDtos(): void {
+    this.clientService.getClientDTOsOrderByIdDesc().subscribe(
       (response: ClientDto[]) => {
         this.clientDTOList = response;
         console.log(this.clientDTOList);
@@ -44,11 +44,11 @@ export class ListClientComponent implements OnInit {
     );
   }
 
-   public onDeleteClient(client: ClientDto): void{
+  onDeleteClient(client: ClientDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.clientService.deleteClientDTO(client.id).subscribe(data => {
+        this.clientService.deleteClientDto(client.id).subscribe(data => {
           this.toastr.warning('Client supprimé avec succès!');
           this.clientDTOList = this.clientDTOList.filter(u => u !== client);
           this.getListClientDtos();

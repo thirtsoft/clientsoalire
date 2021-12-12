@@ -32,8 +32,8 @@ export class ListCommandeComponent implements OnInit {
     this.getListCommandeDtos();
   }
 
-  public getListCommandeDtos(): void {
-    this.comService.getCommandeDTOs().subscribe(
+  getListCommandeDtos(): void {
+    this.comService.getCommandeDtosOrderByIdDesc().subscribe(
       (response: CommandeDto[]) => {
         this.commandeDTOList = response;
         console.log(this.commandeDTOList);
@@ -44,12 +44,15 @@ export class ListCommandeComponent implements OnInit {
     );
   }
 
-  public onDeleteCommande(com: CommandeDto): void{
-    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
+  onDeleteCommande(com: CommandeDto): void{
+    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet commande ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.comService.deleteCommandeDTO(com.id).subscribe(data => {
-          this.toastr.warning('Commande supprimé avec succès!');
+        this.comService.deleteCommandeDto(com.id).subscribe(data => {
+          this.toastr.error('avec succès','Commande supprimé ', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
           this.commandeDTOList = this.commandeDTOList.filter(u => u !== com);
           this.getListCommandeDtos();
         });

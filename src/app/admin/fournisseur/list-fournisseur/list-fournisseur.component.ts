@@ -37,7 +37,7 @@ export class ListFournisseurComponent implements OnInit {
   }
 
   public getListFournisseurDTOs(): void {
-    this.fournisseurService.getFournisseurDTOs().subscribe(
+    this.fournisseurService.getFournisseurDTOsOrderByIdDesc().subscribe(
       (response: FournisseurDto[]) => {
         this.fournisseurDTOList = response;
         console.log(this.fournisseurDTOList);
@@ -75,7 +75,7 @@ export class ListFournisseurComponent implements OnInit {
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.fournisseurService.deleteFournisseurDTO(id).subscribe(data => {
+        this.fournisseurService.deleteFournisseurDto(id).subscribe(data => {
           this.toastr.warning('Fournisseur supprimé avec succès!');
 //          this.fournisseurDTOList = this.fournisseurDTOList.filter(u => u !== four);
           this.getListFournisseurDTOs();

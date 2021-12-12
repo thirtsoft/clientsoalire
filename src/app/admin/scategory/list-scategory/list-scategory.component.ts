@@ -37,7 +37,7 @@ export class ListScategoryComponent implements OnInit {
   }
 
   public getScategoryDTOs(): void {
-    this.scategorieService.getScategoryDTOs().subscribe(
+    this.scategorieService.getALLSuCategoryDtosOrderByIdDesc().subscribe(
       (response: ScategoryDto[]) => {
         this.scategoryListDTO = response;
         console.log(this.scategoryListDTO);
@@ -79,7 +79,7 @@ export class ListScategoryComponent implements OnInit {
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
-        this.scategorieService.deleteScategoryDTO(id).subscribe(data => {
+        this.scategorieService.deleteScategoryDto(id).subscribe(data => {
           this.toastr.warning('Scategory supprimé avec succès!');
 //          this.scategoryListDTO = this.scategoryListDTO.filter(u => u !== scatetgory);
           this.getScategoryDTOs();

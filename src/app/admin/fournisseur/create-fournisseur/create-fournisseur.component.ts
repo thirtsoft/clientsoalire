@@ -47,7 +47,7 @@ export class CreateFournisseurComponent implements OnInit {
 
   getFournisseurDTOById(id: number) {
     console.log('getOne');
-    this.fournisseurService.getFournisseurDTOById(id).subscribe(
+    this.fournisseurService.getFournisseurDtoById(id).subscribe(
       (response: FournisseurDto) => {
         console.log('data--', response);
         this.formDataFournisseurDTO = response;
@@ -58,7 +58,8 @@ export class CreateFournisseurComponent implements OnInit {
     );
 
   }
-  public getListArticleDTOs(): void {
+
+  getListArticleDTOs(): void {
     this.articleService.getArticleDTOs().subscribe(
       (response: ArticleDto[]) => {
         this.ListArticleDTO = response;
@@ -68,8 +69,8 @@ export class CreateFournisseurComponent implements OnInit {
     )
   }
 
-  public onAddFournisseur() {
-    this.fournisseurService.addFournisseurDTO(this.formDataFournisseurDTO).subscribe(
+  onAddFournisseur() {
+    this.fournisseurService.addFournisseurDto(this.formDataFournisseurDTO).subscribe(
       (response: FournisseurDto) => {
     //    this.dialogRef.close();
         this.toastr.success("Fournisseur Ajouté avec Succès");
@@ -81,11 +82,11 @@ export class CreateFournisseurComponent implements OnInit {
     );
   }
 
-  public onUpdateFournisseur() {
-    this.fournisseurService.updateFournisseurDTO(this.formDataFournisseurDTO.id, this.formDataFournisseurDTO).subscribe(
+  onUpdateFournisseur() {
+    this.fournisseurService.updateFournisseurDto(this.formDataFournisseurDTO.id, this.formDataFournisseurDTO).subscribe(
       (response: FournisseurDto) => {
     //    this.dialogRef.close();
-        this.toastr.success("Fournisseur Ajouté avec Succès");
+        this.toastr.success("Fournisseur Modifié avec Succès");
         this.router.navigate(['/backend/admin/fournisseurs']);
       },
       (error: HttpErrorResponse) => {
