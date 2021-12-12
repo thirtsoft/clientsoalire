@@ -66,17 +66,16 @@
                 </div>
                 <div class="col-lg-3 text-right col-md-3">
                     <ul class="nav-right">
-                        <li class="heart-icon">
+                       <!--  <li class="heart-icon">
                             <a href="#">
                                 <i class="icon_heart_alt"></i>
-                                <!-- <span>1</span> -->
                                 <span>{{ totalQuantity }}</span>
                             </a>
-                        </li>
+                        </li> -->
+
                         <li class="cart-icon">
                             <a href="#">
                                 <i class="icon_bag_alt"></i>
-                                <!-- <span>3</span> -->
                                 <span>{{ totalQuantity }}</span>
                             </a>
                             <div class="cart-hover">
@@ -113,18 +112,6 @@
                                                     <i class="ti-close"></i>
                                                 </td>
                                             </tr>
-                                            <!--  <tr>
-                                                <td class="si-pic"><img src="assets/customer/img/select-product-2.jpg" alt=""></td>
-                                                <td class="si-text">
-                                                    <div class="product-selected">
-                                                        <p>$60.00 x 1</p>
-                                                        <h6>Kabino Bedside Table</h6>
-                                                    </div>
-                                                </td>
-                                                <td class="si-close">
-                                                    <i class="ti-close"></i>
-                                                </td>
-                                            </tr> -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -134,11 +121,30 @@
                                 </div>
                                 <div class="select-button">
                                     <a routerLink="/cart" class="primary-btn view-card">VOIR PANIER</a>
-                                    <a routerLink="/checkout" class="primary-btn checkout-btn">CHECK OUT</a>
+                                    <a *ngIf="this.isLoggedIn" routerLink="/checkout" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
                         </li>
                         <li class="cart-price">{{ totalPrice }} </li>
+
+
+                        <li class="cart-icon">
+                            <a *ngIf="!this.username" href="#"> Se connecter
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <a *ngIf="this.username"  href="#"> {{ username }}
+                              <i class="fa fa-user"></i>
+                          </a>
+                            <div class="cart-hover">
+                                <div class="select-button">
+                                    <a routerLink="/auth/login" class="primary-btn view-card">Connexion</a>
+                                    <a routerLink="/auth/signup" class="primary-btn view-card" style="cursor: pointer;">Créer compte</a>
+                                    <a *ngIf="this.isLoggedIn" (click)="getUserOrder()" class="primary-btn view-card" style="cursor: pointer;">Vos Commandes</a>
+                                    <a *ngIf="this.isLoggedIn" (click)="logout()" class="primary-btn view-card" style="cursor: pointer;">Deconnecter</a>
+                                </div>
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>

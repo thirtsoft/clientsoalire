@@ -1,8 +1,11 @@
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TokenStorageService } from './../../auth/token-storage.service';
 import { ToastrService } from 'ngx-toastr';
+
+import { AuthService } from './../../auth/auth.service';
 import { CatalogueService } from './../../services/catalogue.service';
 import { CartItem } from './../../models/cart-item';
-import { Component, OnInit } from '@angular/core';
 
 import { CartService } from './../../services/cart.service';
 
@@ -17,10 +20,6 @@ export class HeaderComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  products;
-  cart;
-  cartItem=[]; // for car list show
-
   cartItems: CartItem[] = [];
   shippingCost: number;
 
@@ -28,17 +27,64 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   username: string;
 
+  private roles: string[];
+
+  showAdminBoard = false;
+  showUserBoard = false;
+  showVendeurBoard = false;
+  email: String;
+  userId;
+  photo;
+  img: boolean;
+
+  currentUser;
+
   constructor(public cartService: CartService,
               public catalogueService: CatalogueService,
-          //    private tokenService: TokenStorageService,
-              private toastr: ToastrService,
-              private route: ActivatedRoute,
+              public autService: AuthService,
+              private tokenService: TokenStorageService,
               private router: Router,
   ) {}
 
   ngOnInit(): void {
     this.updateCartStatus();
 
+    this.isLoggedIn = !!this.tokenService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenService.getUser();
+      this.roles = user.roles;
+
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showVendeurBoard = this.roles.includes("ROLE_VENDEUR");
+      this.showUserBoard = this.roles.includes('ROLE_USER');
+
+      this.username = user.username;
+      this.userId = user.id;
+      this.photo = user.photo;
+
+      this.currentUser = this.autService.getCurrentUser();
+
+      console.log(this.autService.getCurrentUser());
+
+      const loginUser = this.autService.getCurrentLogginUser();
+      console.log("Current user " + loginUser);
+
+    }
+
+  }
+
+  logout() {
+    this.tokenService.signOut();
+    window.location.reload();
+    this.router.navigateByUrl("");
+  }
+
+  getUserOrder() {
+    this.router.navigate(['/my-account/' + this.userId]);
+  }
+
+  getProfile() {
+    this.router.navigate(['/home/profile/' + this.userId]);
   }
 
   updateCartStatus() {

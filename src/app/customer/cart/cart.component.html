@@ -141,7 +141,7 @@
                                 <li class="subtotal">Sous total <span>{{ totalPrice }}f</span></li>
                                 <li class="cart-total">Total <span>{{ totalPrice }}f</span></li>
                             </ul>
-                            <a routerLink="/checkout" class="proceed-btn">PASSER A LA COMMANDE</a>
+                            <a *ngIf="this.isLoggedIn" routerLink="/checkout" class="proceed-btn">PASSER A LA COMMANDE</a>
                         </div>
                     </div>
                 </div>
