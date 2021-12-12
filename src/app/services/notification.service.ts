@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ export class NotificationService {
   artId: any;
 
   constructor(private http: HttpClient,
-    //          private tokenService: TokenStorageService,
+              private tokenService: TokenStorageService,
               private artService: ArticleService
   ) {
   }
@@ -81,10 +82,10 @@ export class NotificationService {
     return this.http.delete<void>(`${this.apiServerUrl}/notifications/delete/${notificationId}`);
   }
 
- /*  getUserId() {
+  getUserId() {
     const user = this.tokenService.getUser();
     this.id = user.id
-  } */
+  }
 
 
 

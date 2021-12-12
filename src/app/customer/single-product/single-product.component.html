@@ -4,9 +4,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a routerLink="/"><i class="fa fa-home"></i> Home</a>
-                    <a routerLink="/shop">Shop</a>
-                    <span>Detail</span>
+                    <a routerLink="/"><i class="fa fa-home"></i> Accueil</a>
+                    <a href="#">Detail Produit</a>
+                    <span *ngIf="articleDTOs">{{articleDTOs?.designation}}</span>
                 </div>
             </div>
         </div>
@@ -145,7 +145,8 @@
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
                             <!-- <img class="product-big-img" src="assets/customer/img/product-single/product-1.jpg" alt=""> -->
-                            <img class="product-big-img" src="assets/customer/img/products/{{pImageDefault}}" alt="Product Image">
+     <!--                        <img class="product-big-img" src="assets/customer/img/products/{{pImageDefault}}" alt="Product Image"> -->
+                            <img class="product-big-img" src="{{this.catalogueService.apiServerUrl+'/articles/photoArticle/'+articleDTOs.id}}" alt="Product Image">
                             <div class="zoom-icon">
                                 <i class="fa fa-search-plus"></i>
                             </div>
@@ -163,23 +164,30 @@
                         <div class="product-details">
                             <div class="pd-title">
                                 <span>oranges</span>
-                                <h3>{{product?.pName}}</h3>
+                                <h3>{{ articleDTOs?.designation }}</h3>
                                 <!-- <h3>Pure Pineapple</h3> -->
                                 <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                             </div>
-                            <div class="pd-rating">
+                            <div class="ratting">
+                              <ngb-rating
+                                  [max]="5"
+                                  [(rate)]="currentRating"
+                                  [readonly]="true">
+                              </ngb-rating>
+                            </div>
+                           <!--  <div class="pd-rating">
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
                                 <span>(5)</span>
-                            </div>
+                            </div> -->
                             <div class="pd-desc">
                                <!--  <p>Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum dolor sit amet, consectetur adipisicing elit, sed do mod tempor</p> -->
-                                 <p>Lorem ipsum dolor sit amet, consectetur ing elit, sed do eiusmod tempor sum dolor sit amet, consectetur adipisicing elit, sed do mod tempor</p>
+                                 <p>{{ articleDTOs?.description }} </p>
                                <!--  <h4>$495.00 <span>629.99</span></h4> -->
-                                <h4>${{product?.pPrice}} <span>629.99</span></h4>
+                                <h4>{{ articleDTOs?.price}} f <span>629.99</span></h4>
                             </div>
                             <div class="pd-color">
                                 <h6>Color</h6>
@@ -219,14 +227,14 @@
                             <div class="quantity">
 
                                 <div class="pro-qty">
-                                    <span class="dec qtybtn" (click)="minus()">-</span>
+                                    <span class="dec qtybtn" (click)="minus()" style="cursor: pointer;">-</span>
                                     <input type="text" value="{{qtyDefault}}">
-                                    <span class="inc qtybtn" (click)="plus()">+</span>
+                                    <span class="inc qtybtn" (click)="plus()" style="cursor: pointer;">+</span>
                                 </div>
                                 <!--  <div class="pro-qty">
                                     <input type="text" value="1">
                                 </div> -->
-                                <a (click)="add2cat(qtyDefault,product)" class="primary-btn pd-cart">Add To Cart</a>
+                                <a (click)="addTocart()" style="cursor: pointer;" class="primary-btn pd-cart">Add to Cart</a>
                             </div>
                             <ul class="pd-tags">
                                 <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
@@ -253,7 +261,7 @@
                                 <a data-toggle="tab" href="#tab-2" role="tab">SPECIFICATIONS</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#tab-3" role="tab">Customer Reviews (02)</a>
+                                <a data-toggle="tab" href="#tab-3" role="tab">Reviews ({{numberOfRatingForProduct}})</a>
                             </li>
                         </ul>
                     </div>
@@ -264,8 +272,7 @@
                                     <div class="row">
                                         <div class="col-lg-7">
                                             <h5>Introduction</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat. Duis aute irure dolor in </p>
+                                            <p>{{ articleDTOs?.description }}  </p>
                                             <h5>Features</h5>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                                                 ex ea commodo consequat. Duis aute irure dolor in </p>
@@ -277,85 +284,55 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="tab-2" role="tabpanel">
-                                <div class="specification-table">
-                                    <table>
-                                        <tr>
-                                            <td class="p-catagory">Customer Rating</td>
-                                            <td>
-                                                <div class="pd-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Price</td>
-                                            <td>
-                                                <div class="p-price">$495.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Add To Cart</td>
-                                            <td>
-                                                <div class="cart-add">+ add to cart</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Availability</td>
-                                            <td>
-                                                <div class="p-stock">22 in stock</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Weight</td>
-                                            <td>
-                                                <div class="p-weight">1,3kg</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Size</td>
-                                            <td>
-                                                <div class="p-size">Xxl</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Color</td>
-                                            <td><span class="cs-color"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Sku</td>
-                                            <td>
-                                                <div class="p-code">00012</div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                              <div class="product-content">
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <h5>Introduction</h5>
+                                        <p>  {{ articleDTOs?.manufactured }}  </p>
+                                        <h5>Features</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                            ex ea commodo consequat. Duis aute irure dolor in </p>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <img src="assets/customer/img/product-single/tab-desc.jpg" alt="">
+                                    </div>
                                 </div>
+                            </div>
                             </div>
                             <div class="tab-pane fade" id="tab-3" role="tabpanel">
                                 <div class="customer-review-option">
-                                    <h4>2 Comments</h4>
-                                    <div class="comment-option">
+                                    <h4>{{numberOfRatingForProduct}} Comments</h4>
+                                    <div class="comment-option"  *ngFor="let rat of notificationListDTO; let i=index;">
                                         <div class="co-item">
                                             <div class="avatar-pic">
                                                 <img src="assets/customer/img/product-single/avatar-1.png" alt="">
                                             </div>
                                             <div class="avatar-text">
-                                                <div class="at-rating">
+                                                <!-- <div class="at-rating">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-o"></i>
+                                                </div> -->
+
+                                                <div class="at-rating">
+                                                  <ngb-rating
+                                                    [(rate)]="rat.nbreEtoile"
+                                                    [id]="'rating3'"
+                                                    [readonly]="true"
+                                                    [max]="maxRatingValue"
+                                                  >
+                                                  </ngb-rating>
+
                                                 </div>
-                                                <h5>Brandon Kelley <span>27 Aug 2019</span></h5>
-                                                <div class="at-reply">Nice !</div>
+                                              <!--   <h5>Brandon Kelley <span>27 Aug 2019</span></h5> -->
+                                                <h5>{{ rat.utilisateurDto.name }} <span>{{ rat.createdDate | date:'dd-MM-yyyy' }}</span></h5>
+                                            <!--     <div class="at-reply">Nice !</div> -->
+                                                <div class="at-reply">{{ rat.observation }} !</div>
                                             </div>
                                         </div>
-                                        <div class="co-item">
+                                    <!--     <div class="co-item">
                                             <div class="avatar-pic">
                                                 <img src="assets/customer/img/product-single/avatar-2.png" alt="">
                                             </div>
@@ -370,35 +347,47 @@
                                                 <h5>Roy Banks <span>27 Aug 2019</span></h5>
                                                 <div class="at-reply">Nice !</div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div class="personal-rating">
-                                        <h6>Your Ratind</h6>
+
+
+                                  <div class="personal-rating" *ngIf="this.isLoggedIn">
+                                        <h6>Donner votre Avis</h6>
                                         <div class="rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
+                                          <ngb-rating
+                                              formControlName="nbreEtoile"
+                                              [(rate)]="currentRatingArticle"
+                                              [max]="maxRatingValue"
+                                              [readonly]="false"
+                                              [id]="'rating3'"
+                                              [readonly]="false"
+                                              (rateChange)="onRateChange($event)"
+                                            >
+                                          </ngb-rating>
+
                                         </div>
+
                                     </div>
-                                    <div class="leave-comment">
-                                        <h4>Leave A Comment</h4>
-                                        <form action="#" class="comment-form">
+                                    <div class="leave-comment" *ngIf="this.isLoggedIn">
+                                        <h4>Votre commentaire</h4>
+                                        <form [formGroup]="this.formData" (ngSubmit)="onaddRating()" class="comment-form">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                              <!-- <div class="col-lg-6">
                                                     <input type="text" placeholder="Name">
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <input type="text" placeholder="Email">
-                                                </div>
+                                                </div> -->
                                                 <div class="col-lg-12">
-                                                    <textarea placeholder="Messages"></textarea>
-                                                    <button type="submit" class="site-btn">Send message</button>
+                                                    <textarea formControlName="observation" required
+                                                      id="observation" required placeholder="Messages"></textarea>
+
+                                                    <button [disabled]="!this.formData.valid" type="submit" class="site-btn">Send message</button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

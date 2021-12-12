@@ -3,6 +3,18 @@ import { CommonModule } from '@angular/common';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+
+
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination' ;
+
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddNoteComponent } from './notification/add-note/add-note.component';
 import { ListNoteComponent } from './notification/list-note/list-note.component';
@@ -86,7 +98,18 @@ import { AboutComponent } from './about/about.component';
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+
+    MatExpansionModule,
+    MatPaginatorModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
+  ],
+  entryComponents: [
+
   ]
 })
 export class CustomerModule { }

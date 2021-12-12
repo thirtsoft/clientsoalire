@@ -1,1 +1,58 @@
-<p>add-note works!</p>
+<div class="personal-rating" *ngIf="this.isLoggedIn">
+  <h6>Votre Avis</h6>
+  <div class="rating">
+    <ngb-rating
+        formControlName="nbreEtoile"
+        [(rate)]="currentRating"
+        [max]="maxRatingValue"
+        [readonly]="false"
+        [id]="'rating3'"
+        [readonly]="false"
+        (rateChange)="onRateChange($event)"
+      >
+      <div
+      *ngIf="
+        f['nbreEtoile'].invalid &&
+        (f['nbreEtoile'].dirty || f['nbreEtoile'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <span *ngIf="f['nbreEtoile'].errors.required"
+        >Le choix du nombre d'étoiles est obligatoire.</span
+      >
+
+    </div>
+
+  </ngb-rating>
+  </div>
+</div>
+<div class="leave-comment" *ngIf="this.isLoggedIn">
+  <h4>Votre commentaire</h4>
+  <form [formGroup]="this.formData" (ngSubmit)="onSubmit()">
+      <div class="row">
+         <!--  <div class="col-lg-6">
+              <input type="text" placeholder="Name">
+          </div>
+          <div class="col-lg-6">
+              <input type="text" placeholder="Email">
+          </div> -->
+          <div class="col-lg-12">
+              <textarea formControlName="observation"
+                id="observation" required  placeholder="Messages"></textarea>
+              <div
+              *ngIf="
+                f['observation'].invalid &&
+                (f['observation'].dirty || f['observation'].touched)
+              "
+              class="alert alert-danger"
+            >
+              <span *ngIf="f['observation'].errors.required"
+                >L'observation de est obligatoire.</span
+              >
+
+            </div>
+              <button [disabled]="!this.formData.valid" type="submit" class="site-btn">Send message</button>
+          </div>
+      </div>
+  </form>
+</div>
