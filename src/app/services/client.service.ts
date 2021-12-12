@@ -34,25 +34,31 @@ export class ClientService {
     return this.http.delete<void>(`${this.apiServerUrl}/clients/delete/${clientId}`);
   }
 
-  /******************** ClientDTO ****************/
+  /************************ ClientDTO *******************/
+
   public getClientDTOs(): Observable<ClientDto[]> {
     return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/all`);
   }
 
-  public getClientDTOById(clientId: number): Observable<ClientDto> {
+  public getClientDTOsOrderByIdDesc(): Observable<ClientDto[]> {
+    return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/searchAllClientsOrderByIdDesc`);
+  }
+
+  public getClientDtoById(clientId: number): Observable<ClientDto> {
     return this.http.get<ClientDto>(`${this.apiServerUrl}/clients/${clientId}`);
   }
 
-  public addClientDTO(clientDTO: ClientDto): Observable<ClientDto> {
+  public addClientDto(clientDTO: ClientDto): Observable<ClientDto> {
     return this.http.post<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
   }
 
-  public updateClientDTO(clientId: number, clientDTO: ClientDto): Observable<ClientDto> {
-    return this.http.put<ClientDto>(`${this.apiServerUrl}/categories/update/${clientId}`, clientDTO);
+  public updateClientDto(clientDTO: ClientDto): Observable<ClientDto> {
+    return this.http.put<ClientDto>(`${this.apiServerUrl}/clients/create`, clientDTO);
   }
 
-  public deleteClientDTO(clientId: number): Observable<void> {
+  public deleteClientDto(clientId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/clients/delete/${clientId}`);
   }
+
 
 }

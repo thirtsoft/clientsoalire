@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Fournisseur, FournisseurDto } from './../models/fournisseur';
 import { Observable } from 'rxjs';
@@ -10,6 +11,12 @@ import { environment } from 'src/environments/environment';
 export class FournisseurService {
 
   private apiServerUrl = environment.apiBaseUrl;
+
+  choixmenu : string  = 'A';
+  listData : Fournisseur[];
+  formData:  Fournisseur;
+
+  dataForm:  FormGroup;
 
   constructor(private http: HttpClient) {
   }
@@ -34,27 +41,33 @@ export class FournisseurService {
     return this.http.delete<void>(`${this.apiServerUrl}/fournisseurs/delete/${fournisseurId}`);
   }
 
-  /************************** FournisseurDTO ************/
+  /**************** FournisseurDTO  *******/
+
   public getFournisseurDTOs(): Observable<FournisseurDto[]> {
     return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/all`);
   }
 
-  public getFournisseurDTOById(fournisseurId: number): Observable<FournisseurDto> {
+  public getFournisseurDTOsOrderByIdDesc(): Observable<FournisseurDto[]> {
+    return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/searchAllFournisseursOrderByIdDesc`);
+  }
+
+  public getFournisseurDtoById(fournisseurId: number): Observable<FournisseurDto> {
     return this.http.get<FournisseurDto>(`${this.apiServerUrl}/fournisseurs/${fournisseurId}`);
   }
 
-  public addFournisseurDTO(fournisseurDTO: FournisseurDto): Observable<FournisseurDto> {
+  public addFournisseurDto(fournisseurDTO: FournisseurDto): Observable<FournisseurDto> {
     return this.http.post<FournisseurDto>(`${this.apiServerUrl}/fournisseurs/create`, fournisseurDTO);
   }
 
-  public updateFournisseurDTO(fournisseurId: number, fournisseurDTO: FournisseurDto): Observable<FournisseurDto> {
+  public updateFournisseurDto(fournisseurId: number, fournisseurDTO: FournisseurDto): Observable<FournisseurDto> {
     return this.http.put<FournisseurDto>(`${this.apiServerUrl}/fournisseurs/update/${fournisseurId}`, fournisseurDTO);
   }
 
-  
-  public deleteFournisseurDTO(fournisseurId: number): Observable<void> {
+  public deleteFournisseurDto(fournisseurId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/fournisseurs/delete/${fournisseurId}`);
   }
+
+
 
 
 }

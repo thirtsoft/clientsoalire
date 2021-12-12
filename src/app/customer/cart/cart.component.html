@@ -18,7 +18,7 @@
 <section class="shopping-cart spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" *ngIf="cartItems.length > 0">
                 <div class="cart-table">
                     <table>
                         <thead>
@@ -32,25 +32,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of cartItem; let i=index;">
+                            <tr *ngFor="let item of cartItems; let i = index">
                                 <td class="cart-pic first-row">
                                     <!-- <img src="assets/customer/img/cart-page/product-1.jpg" alt=""> -->
-                                    <img src="assets/customer/img/products/{{item.data.pImageDefault}}" alt="Image">
+                                    <img
+                                      [src]="
+                                        this.catalogueService.apiServerUrl +
+                                        '/articles/photoArticle/' +
+                                        item.id +
+                                        '?ts=' +
+                                        getTS()
+                                      "
+                                      alt="Product Image"
+                                      height="90"
+                                      width="90"
+                                    />
                                 </td>
                                 <td class="cart-title first-row">
                                     <!-- <h5>Pure Pineapple</h5> -->
-                                    <h5>{{item.data.pName}}</h5>
+                                    <h5>{{ item.name }}</h5>
                                 </td>
                                 <!-- <td class="p-price first-row">$60.00</td> -->
-                                <td class="p-price first-row">${{item.price}}</td>
+                                <td class="p-price first-row">{{ item.unitPrice }}</td>
                                 <td class="qua-col first-row">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <span class="dec qtybtn" (click)="minus(item.data)">-</span>
+                                            <span (click)="decrementQuantity(item)" class="dec qtybtn" style="cursor: pointer">-</span>
                                             <!-- <span class="dec qtybtn">-</span> -->
-                                            <input type="text" value="{{item.qty}}">
+                                            <input type="text" value="{{ item.quantity }}">
                                             <!-- <input type="text" value="1"> -->
-                                            <span class="inc qtybtn" (click)="plus(item.data)">+</span>
+                                            <span class="inc qtybtn" (click)="inCrementQuantity(item)"
+                                            style="cursor: pointer">+</span>
                                             <!-- <span class="inc qtybtn">+</span> -->
                                         </div>
                                     </div>
@@ -63,8 +75,9 @@
                                     </div>
                                 </td> -->
                                 <!-- <td class="total-price first-row">$60.00</td> -->
-                                <td class="total-price first-row">${{item.price * item.qty}}</td>
-                                <td class="close-td first-row" (click)="removeCart(item.pId)"><i class="ti-close"></i></td>
+                                <td class="total-price first-row">{{ item.unitPrice * item.quantity }}</td>
+                                <td class="close-td first-row" (click)="removeCart(item)"
+                                style="cursor: pointer"><i class="ti-close"></i></td>
                             </tr>
                             <!-- <tr>
                                 <td class="cart-pic"><img src="assets/customer/img/cart-page/product-2.jpg" alt=""></td>
@@ -115,31 +128,75 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
+
+                <div class="row" *ngIf="cartItems.length > 0">
                     <div class="col-lg-4">
                         <div class="cart-buttons">
-                            <a href="#" class="primary-btn continue-shop">Continue shopping</a>
-                            <a href="#" class="primary-btn up-cart">Update cart</a>
-                        </div>
-                        <div class="discount-coupon">
-                            <h6>Discount Codes</h6>
-                            <form action="#" class="coupon-form">
-                                <input type="text" placeholder="Enter your codes">
-                                <button type="submit" class="site-btn coupon-btn">Apply</button>
-                            </form>
+                            <a routerLink="/" class="primary-btn up-cart">Continuez votre Achat</a>
                         </div>
                     </div>
                     <div class="col-lg-4 offset-lg-4">
                         <div class="proceed-checkout">
                             <ul>
-                                <li class="subtotal">Subtotal <span>$240.00</span></li>
-                                <li class="cart-total">Total <span>$240.00</span></li>
+                                <li class="subtotal">Sous total <span>{{ totalPrice }}f</span></li>
+                                <li class="cart-total">Total <span>{{ totalPrice }}f</span></li>
                             </ul>
-                            <a routerLink="/checkout" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                            <a routerLink="/checkout" class="proceed-btn">PASSER A LA COMMANDE</a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-12" *ngIf="cartItems.length == 0">
+              <div class="card">
+                <div class="card-header">
+                  <h5>PANIER</h5>
+                </div>
+
+                <div class="card-body cart">
+                  <div class="col-sm-12 empty-cart-cls text-center">
+                    <img
+                      src="https://i.imgur.com/dCdflKN.png"
+                      width="50"
+                      height="50"
+                      class="img-fluid mb-3 mr-2"
+                    />
+                    <h3><strong>VOTRE PANIER EST VIDE</strong></h3>
+                    <h4>Veuillez Ajouter des articles à votre panier :)</h4>
+                    <a
+                      routerLink="/"
+                      class="btn btn-success cart-btn-transform m-3"
+                      data-abc="true"
+                      >continuer votre achat</a
+                    >
+                  </div>
+                </div>
+              </div>
+             <!--  <div class="row">
+                  <div class="col-lg-4">
+                      <div class="cart-buttons">
+                          <a href="#" class="primary-btn continue-shop">Continue shopping</a>
+                          <a href="#" class="primary-btn up-cart">Update cart</a>
+                      </div>
+                      <div class="discount-coupon">
+                          <h6>Discount Codes</h6>
+                          <form action="#" class="coupon-form">
+                              <input type="text" placeholder="Enter your codes">
+                              <button type="submit" class="site-btn coupon-btn">Apply</button>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="col-lg-4 offset-lg-4">
+                      <div class="proceed-checkout">
+                          <ul>
+                              <li class="subtotal">Subtotal <span>$240.00</span></li>
+                              <li class="cart-total">Total <span>$240.00</span></li>
+                          </ul>
+                          <a routerLink="/checkout" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                      </div>
+                  </div>
+              </div> -->
+          </div>
         </div>
     </div>
 </section>

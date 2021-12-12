@@ -12,6 +12,7 @@ export class Article {
   photo: string;
 
   scategorie: Scategory;
+
 }
 
 export class ArticleDto {
@@ -24,7 +25,9 @@ export class ArticleDto {
   promo: boolean;
   selected: boolean;
   description: string;
+  manufactured: string;
   photo: string;
+  quantite: number = 1;
 
   scategoryDto: ScategoryDto;
 

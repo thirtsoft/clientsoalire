@@ -1,7 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Article, ArticleDto } from './../models/article';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { Article, ArticleDto } from './../models/article';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,6 +13,11 @@ import { environment } from 'src/environments/environment';
 export class ArticleService {
 
   private apiServerUrl = environment.apiBaseUrl;
+
+  choixmenu : string  = 'A';
+  listData : ArticleDto[];
+
+  formData:  FormGroup;
 
   constructor(private http: HttpClient) {
   }
@@ -38,10 +46,14 @@ export class ArticleService {
     return this.http.delete<void>(`${this.apiServerUrl}/articles/delete/${articleId}`);
   }
 
-  /********************** ArticleDTO   *****************/
+  /************   ArticleDTO  ***************/
 
   public getArticleDTOs(): Observable<ArticleDto[]> {
     return this.http.get<ArticleDto[]>(`${this.apiServerUrl}/articles/all`);
+  }
+
+  public getArticleDTOsOrderByIdDesc(): Observable<ArticleDto[]> {
+    return this.http.get<ArticleDto[]>(`${this.apiServerUrl}/articles/searchAllArticleOrderByIdDesc`);
   }
 
   public getArticleDtoById(articleId: number): Observable<ArticleDto> {
@@ -49,20 +61,57 @@ export class ArticleService {
   }
 
   public getArticleDtoByReference(reference: string): Observable<ArticleDto> {
-    return this.http.get<ArticleDto>(`${this.apiServerUrl}/articles/${reference}`);
+    return this.http.get<ArticleDto>(`${this.apiServerUrl}/articles/searchbyReference/${reference}`);
   }
 
   public addArticleDto(articleDTO: ArticleDto): Observable<ArticleDto> {
     return this.http.post<ArticleDto>(`${this.apiServerUrl}/articles/create`, articleDTO);
   }
 
+  public addArticleDtoWithPhoto(formData: FormData): Observable<any> {
+    const req = new HttpRequest('POST', `${this.apiServerUrl}/articles/createWithFile`, formData, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+    return this.http.request(req);
+  }
+
+
   public updateArticleDto(articleId: number, articleDTO: ArticleDto): Observable<ArticleDto> {
     return this.http.put<ArticleDto>(`${this.apiServerUrl}/articles/update/${articleId}`, articleDTO);
+  }
+
+  uploadPhotoArticleDto(file: File, id: number): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.apiServerUrl+'/articles/uploadArticlePhoto/' + id, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
+  }
+
+  public getPhotoArticle() {
+    return this.http.get(`${this.apiServerUrl}/articles/photoArticle`);
   }
 
   public deleteArticleDto(articleId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/articles/delete/${articleId}`);
   }
+
+
+  incrementQuantityArticleDTO(articleDTO: ArticleDto) {
+    articleDTO.quantite++;
+
+  }
+
+  decrementQuantityArticleDTO(articleDTO: ArticleDto) {
+    articleDTO.quantite--;
+
+  }
+
+
 
 
 }

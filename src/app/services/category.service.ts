@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,12 @@ import { environment } from 'src/environments/environment';
 export class CategoryService {
 
   private apiServerUrl = environment.apiBaseUrl;
+
+  choixmenu : string  = 'A';
+
+  dataForm:  FormGroup;
+
+  listData : CategoryDto[];
 
   constructor(private http: HttpClient) {
   }
@@ -38,30 +45,33 @@ export class CategoryService {
     return this.http.delete<void>(`${this.apiServerUrl}/categories/delete/${categoryId}`);
   }
 
-  /****************** CategoryDTO **********/
-  public getCategoryDTOs(): Observable<CategoryDto[]> {
+   /***************************** CategoryDTO    *************/
+
+   public getCategorieDTOs(): Observable<CategoryDto[]> {
     return this.http.get<CategoryDto[]>(`${this.apiServerUrl}/categories/all`);
   }
 
-  public getCategoryDTOById(categoryId: number): Observable<CategoryDto> {
+  public getCategorieDTOsOrderByIdDesc(): Observable<CategoryDto[]> {
+    return this.http.get<CategoryDto[]>(`${this.apiServerUrl}/categories/searchAllCategorieOrderByIdDesc`);
+  }
+
+  public getCategoryDtoById(categoryId: number): Observable<CategoryDto> {
     return this.http.get<CategoryDto>(`${this.apiServerUrl}/categories/${categoryId}`);
   }
 
-  public getCategoryDTOByDesignation(designation: string): Observable<CategoryDto> {
+  public getCategoryDtoByDesignation(designation: string): Observable<CategoryDto> {
     return this.http.get<CategoryDto>(`${this.apiServerUrl}/categories/${designation}`);
   }
 
-  public addCategoryDTO(categoryDTO: CategoryDto): Observable<Category> {
+  public addCategoryDto(categoryDTO: CategoryDto): Observable<CategoryDto> {
     return this.http.post<CategoryDto>(`${this.apiServerUrl}/categories/create`, categoryDTO);
   }
 
-  public updateCategoryDTO(categoryId: number, categoryDTO: CategoryDto): Observable<CategoryDto> {
+  public updateCategoryDto(categoryId: number, categoryDTO: CategoryDto): Observable<CategoryDto> {
     return this.http.put<CategoryDto>(`${this.apiServerUrl}/categories/update/${categoryId}`, categoryDTO);
   }
 
- 
   public deleteCategoryDto(categoryId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/categories/delete/${categoryId}`);
   }
-
 }
