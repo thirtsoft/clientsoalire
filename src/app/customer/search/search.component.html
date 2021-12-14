@@ -1,1 +1,8 @@
-<p>search works!</p>
+<div class="advanced-search">
+  <button type="button" class="category-btn">Categories</button>
+  <div class="input-group">
+      <input type="text" #searchInput (keyup.enter)="searchArticle(searchInput.value)" placeholder="Rechercher un Produit ?">
+      <button type="button" (click)="searchArticle(searchInput.value)"><i class="ti-search"></i></button>
+  </div>
+</div>
+
