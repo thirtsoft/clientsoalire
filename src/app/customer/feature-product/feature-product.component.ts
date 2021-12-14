@@ -1,22 +1,20 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from './../../services/cart.service';
-import { CatalogueService } from './../../services/catalogue.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CartItem } from './../../models/cart-item';
+
+import { CatalogueService } from './../../services/catalogue.service';
 import { ArticleDto } from './../../models/article';
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../shared/data.service';
-import  axios  from 'axios';
-import { Router, ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-feature-product',
   templateUrl: './feature-product.component.html',
   styleUrls: ['./feature-product.component.scss']
 })
 export class FeatureProductComponent implements OnInit {
-
-  cart:any;
-  products: any;
 
   articleListDTOBySelected: ArticleDto[];
 
@@ -28,8 +26,7 @@ export class FeatureProductComponent implements OnInit {
 
   currentRating = 4;
 
-  constructor(private dataService: DataService,
-              private router: Router,
+  constructor(private router: Router,
               public catalogueService: CatalogueService,
               private cartService: CartService,
               private toastr: ToastrService,
@@ -88,40 +85,6 @@ export class FeatureProductComponent implements OnInit {
       positionClass: 'toast-top-right',
     });
 
-  }
-
-  async getProducts() {
-    try {
-      const response = await  axios.get('assets/data/products.json');
-      console.log("response data", response.data);
-      console.log("response status", response.status);
-
-      this.products = response.data;
-
-    } catch (e) {
-      console.log(e);
-    }
-
-  }
-
-  add2cart(qty,product) {
-  //  let tmpCart = {cart: this.cart.cart + item, products: []};
-    this.cart.products.push(product);
-    this.cart.cart = this.cart.cart + qty;
- //   this.cart++;
-    this.dataService.updateCart(this.cart);
-
-    console.log("this.cart--", this.cart);
-  }
-
-  add2cart2(qty,product) {
-   //  let tmpCart = {cart: this.cart.cart + item, products: []};
-      this.cart.products.push(product);
-      this.cart.cart = this.cart.cart + qty;
- //   this.cart++;
-      this.dataService.updateCart(this.cart);
-
-      console.log("this.cart--", this.cart);
   }
 
   buynow() {

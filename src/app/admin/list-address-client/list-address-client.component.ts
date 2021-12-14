@@ -44,7 +44,7 @@ export class ListAddressClientComponent implements OnInit {
     );
   }
 
-   public onDeleteAddressClient(addClient: AddressClientDto): void{
+  /*  public onDeleteAddressClient(addClient: AddressClientDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -54,6 +54,18 @@ export class ListAddressClientComponent implements OnInit {
           this.getAddressClientDtos();
         });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    ); 
+  }*/
+
+  public onDeleteAddressClient(addClient: AddressClientDto): void{
+        this.addClientService.deleteAddressClientDto(addClient.id).subscribe(data => {
+          this.toastr.warning('AddressClient supprimé avec succès!');
+          this.addressClientDTOList = this.addressClientDTOList.filter(u => u !== addClient);
+          this.getAddressClientDtos();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);

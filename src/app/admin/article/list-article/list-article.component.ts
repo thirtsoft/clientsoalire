@@ -75,16 +75,27 @@ export class ListArticleComponent implements OnInit {
 
 */
 
-  public onDeleteArticle(id: number): void{
+  /* public onDeleteArticle(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
         this.articleService.deleteArticleDto(id).subscribe(data => {
           this.toastr.warning('Article supprimé avec succès!');
-        //  this.articleDTOList = this.articleDTOList.filter(u => u !== article);
           this.getListArticleDTOs();
         });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  } */
+
+  public onDeleteArticle(id: number): void{
+        this.articleService.deleteArticleDto(id).subscribe(data => {
+          this.toastr.error('Article supprimé avec succès!');
+          this.getListArticleDTOs();
+    
     },
     (error: HttpErrorResponse) => {
       alert(error.message);

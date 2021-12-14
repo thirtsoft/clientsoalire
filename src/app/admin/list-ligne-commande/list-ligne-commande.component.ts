@@ -44,7 +44,7 @@ export class ListLigneCommandeComponent implements OnInit {
     );
   }
 
-  onDeleteligneCommande(lcom: LigneCommandeDto): void{
+ /*  onDeleteligneCommande(lcom: LigneCommandeDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -63,4 +63,20 @@ export class ListLigneCommandeComponent implements OnInit {
     }
     );
   }
+ */
+  onDeleteligneCommande(lcom: LigneCommandeDto): void{
+        this.lcomService.deleteLigneCommandeDto(lcom.id).subscribe(data => {
+          this.toastr.error('avec succès','LigneCommande supprimé', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
+          this.ligneCommandeDTOList = this.ligneCommandeDTOList.filter(u => u !== lcom);
+          this.getLigneCommandeDtos();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  }
+
 }

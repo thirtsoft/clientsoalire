@@ -1,14 +1,16 @@
-import { ToastrService } from 'ngx-toastr';
-import { CartService } from './../../services/cart.service';
-import { ArticleService } from './../../services/article.service';
-import { CatalogueService } from './../../services/catalogue.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { CartItem } from './../../models/cart-item';
-import { ArticleDto } from './../../models/article';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../shared/data.service';
-import  axios  from 'axios';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+
+import { ArticleService } from './../../services/article.service';
+import { ArticleDto } from './../../models/article';
+
+import { CartService } from './../../services/cart.service';
+import { CartItem } from './../../models/cart-item';
+
+import { CatalogueService } from './../../services/catalogue.service';
 
 @Component({
   selector: 'app-shop-list',

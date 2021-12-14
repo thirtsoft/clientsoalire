@@ -10,11 +10,18 @@ import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.
 import { AccueilComponent } from './layouts/accueil/accueil.component';
 
 const routes: Routes = [
+
+  { path: '',
+    loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule)
+  },
+  { path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  { path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+
  /*  {
-    path: '',
-    component: AccueilComponent
-  }, */
-  {
     path: 'shop-categories',
     component: CategoriesComponent
   },
@@ -27,7 +34,7 @@ const routes: Routes = [
     path: 'backend',
     component: AdminLayoutComponent,
     children: BACKEND_ROUTES
-  },
+  }, */
   { path: '**', redirectTo: '404'}
 ];
 

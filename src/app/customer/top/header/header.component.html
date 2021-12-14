@@ -1,0 +1,167 @@
+<header class="header-section">
+
+  <app-top-bar></app-top-bar>
+
+  <div class="container">
+      <div class="inner-header">
+          <div class="row">
+              <div class="col-lg-2 col-md-2">
+                  <div class="logo">
+                      <a routerLink="/" >
+                          <img src="assets/customer/img/logo.png" alt="">
+                      </a>
+                  </div>
+              </div>
+              <div class="col-lg-7 col-md-7">
+                  <div class="advanced-search">
+                      <button type="button" class="category-btn">All Categories</button>
+                      <div class="input-group">
+                          <input type="text" placeholder="What do you need?">
+                          <button type="button"><i class="ti-search"></i></button>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-3 text-right col-md-3">
+                  <ul class="nav-right">
+                     <!--  <li class="heart-icon">
+                          <a href="#">
+                              <i class="icon_heart_alt"></i>
+                              <span>{{ totalQuantity }}</span>
+                          </a>
+                      </li> -->
+
+                      <li class="cart-icon">
+                          <a href="#">
+                              <i class="icon_bag_alt"></i>
+                              <span>{{ totalQuantity }}</span>
+                          </a>
+                          <div class="cart-hover">
+                              <div class="select-items" *ngIf="cartItems.length > 0">
+                                  <table>
+                                      <tbody>
+                                          <tr *ngFor="let item of cartItems; let i = index">
+                                           <!--  <tr *ngFor="let item of cart.products; let i=index;"></tr> -->
+                                              <td class="si-pic">
+                                                  <!-- <img src="assets/customer/img/select-product-1.jpg" alt=""> -->
+                                                 <!--  <img src="assets/customer/img/products/{{item.pImageDefault}}" alt="Image"> -->
+                                                  <img
+                                                  [src]="
+                                                    this.catalogueService.apiServerUrl +
+                                                    '/articles/photoArticle/' +
+                                                    item.id +
+                                                    '?ts=' +
+                                                    getTS()
+                                                  "
+                                                  alt="Product Image"
+                                                  height="40"
+                                                  width="40"
+                                                />
+                                                </td>
+                                              <td class="si-text">
+                                                  <div class="product-selected">
+                                                      <p>{{item.unitPrice}} x {{item.quantity}}</p>
+                                                      <!-- <p>$60.00 x 1</p> -->
+                                                      <h6>{{ item.name }}</h6>
+                                                      <!-- <h6>Kabino Bedside Table</h6> -->
+                                                  </div>
+                                              </td>
+                                              <td class="si-close" (click)="removeCart(item)">
+                                                  <i class="ti-close"></i>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                              <div class="select-total">
+                                  <span>total:</span>
+                                  <h5>{{ totalPrice }} f CFA</h5>
+                              </div>
+                              <div class="select-button">
+                                  <a routerLink="/cart" class="primary-btn view-card">VOIR PANIER</a>
+                                  <a *ngIf="this.isLoggedIn" routerLink="/checkout" class="primary-btn checkout-btn">CHECK OUT</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li class="cart-price">{{ totalPrice }} </li>
+
+
+                      <li class="cart-icon">
+                          <a *ngIf="!this.username" href="#"> Se connecter
+                              <i class="fa fa-user"></i>
+                          </a>
+                          <a *ngIf="this.username"  href="#"> {{ username }}
+                            <i class="fa fa-user"></i>
+                        </a>
+                          <div class="cart-hover">
+                              <div class="select-button">
+                                  <a routerLink="/auth/login" class="primary-btn view-card">Connexion</a>
+                                  <a routerLink="/auth/signup" class="primary-btn view-card" style="cursor: pointer;">Créer compte</a>
+                                  <a *ngIf="this.isLoggedIn" (click)="getUserOrder()" class="primary-btn view-card" style="cursor: pointer;">Vos Commandes</a>
+                                  <a *ngIf="this.isLoggedIn" (click)="logout()" class="primary-btn view-card" style="cursor: pointer;">Deconnecter</a>
+                              </div>
+                          </div>
+                      </li>
+
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="nav-item">
+      <div class="container">
+          <div class="nav-depart">
+
+            <app-nav></app-nav>
+
+
+
+            <!-- <div class="depart-btn" >
+                  <i class="ti-menu"></i>
+                <span>Tous Categories </span>
+
+
+                   <ul class="depart-hover" >
+                      <li  *ngFor="let scatDTO of scategoryListDTOs; let i = index;" class="active"><a [routerLink]="['/shop']"  style="cursor: pointer" href="#">{{ scatDTO.libelle }}</a></li>
+                      <li><a href="#">Men’s Clothing</a></li>
+                      <li><a href="#">Underwear</a></li>
+                      <li><a href="#">Kid's Clothing</a></li>
+                      <li><a href="#">Brand Fashion</a></li>
+                      <li><a href="#">Accessories/Shoes</a></li>
+                      <li><a href="#">Luxury Brands</a></li>
+                      <li><a href="#">Brand Outdoor Apparel</a></li>
+                  </ul>
+              </div> -->
+          </div>
+          <nav class="nav-menu mobile-menu">
+              <ul>
+                  <li class="active"><a routerLink="/">Home</a></li>
+                  <li>
+                      <a routerLink="/shop">Shop</a>
+                  </li>
+                  <li><a href="#">Collection</a>
+                      <ul class="dropdown">
+                          <li><a href="#">Men's</a></li>
+                          <li><a href="#">Women's</a></li>
+                          <li><a href="#">Kid's</a></li>
+                      </ul>
+                  </li>
+                  <li><a href="./blog.html">Blog</a></li>
+                  <li><a routerLink="/contact">Contact</a></li>
+                  <li><a href="#">Pages</a>
+                      <ul class="dropdown">
+                          <li><a routerLink="/product-detail">Blog Details</a></li>
+                          <li><a routerLink="/cart">Shopping Cart</a></li>
+                          <li><a routerLink="/checkout">Checkout</a></li>
+                          <li><a routerLink="/faq">Faq</a></li>
+                          <li><a routerLink="/auth/signup">Register</a></li>
+                          <li><a routerLink="/auth/login">Login</a></li>
+                      </ul>
+                  </li>
+              </ul>
+          </nav>
+          <div id="mobile-menu-wrap"></div>
+      </div>
+  </div>
+
+</header>

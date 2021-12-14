@@ -45,7 +45,7 @@ export class ListNoteArticleComponent implements OnInit {
     );
   }
 
-  public onDeleteNotification(note: NoteDto): void{
+/*   public onDeleteNotification(note: NoteDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -60,5 +60,18 @@ export class ListNoteArticleComponent implements OnInit {
       alert(error.message);
     }
     );
+  } */
+
+  public onDeleteNotification(note: NoteDto): void{
+        this.noteService.deleteNotificationDTO(note.id).subscribe(data => {
+          this.toastr.warning('Notification supprimé avec succès!');
+          this.notificationDTOList = this.notificationDTOList.filter(u => u !== note);
+          this.getNotificationDtos();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
+
 }

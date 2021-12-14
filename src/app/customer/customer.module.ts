@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerRoutingModule } from './customer-routing.module';
-import { SharedModule } from '../shared/shared.module';
 
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+
 
 
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -54,7 +54,15 @@ import { AboutComponent } from './about/about.component';
 import { SearchbyPriceComponent } from './searchby-price/searchby-price.component';
 import { SearchInShopComponent } from './search-in-shop/search-in-shop.component';
 import { SidebarSubcatComponent } from './sidebar-subcat/sidebar-subcat.component';
-import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
+import { TopBarComponent } from './top/top-bar/top-bar.component';
+import { NavbarComponent } from './top/navbar/navbar.component';
+import { NavComponent } from './top/nav/nav.component';
+import { MaintopComponent } from './top/maintop/maintop.component';
+import { BottombarComponent } from './top/bottombar/bottombar.component';
+import { FooterComponent } from './bottom/footer/footer.component';
+import { FooerbottomComponent } from './bottom/fooerbottom/fooerbottom.component';
+import { MainfooterComponent } from './bottom/mainfooter/mainfooter.component';
+import { HeaderComponent } from './top/header/header.component';
 
 
 @NgModule({
@@ -100,16 +108,24 @@ import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
     SearchbyPriceComponent,
     SearchInShopComponent,
     SidebarSubcatComponent,
-    SidebarHomeComponent
+    TopBarComponent,
+    NavbarComponent,
+    NavComponent,
+    MaintopComponent,
+    BottombarComponent,
+    FooterComponent,
+    FooerbottomComponent,
+    MainfooterComponent,
+    HeaderComponent,
   ],
 
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+
 
     MatExpansionModule,
     MatPaginatorModule,

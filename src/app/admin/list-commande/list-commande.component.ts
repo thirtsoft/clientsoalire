@@ -44,7 +44,7 @@ export class ListCommandeComponent implements OnInit {
     );
   }
 
-  onDeleteCommande(com: CommandeDto): void{
+ /*  onDeleteCommande(com: CommandeDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet commande ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -57,6 +57,21 @@ export class ListCommandeComponent implements OnInit {
           this.getListCommandeDtos();
         });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  } */
+
+  onDeleteCommande(com: CommandeDto): void{
+        this.comService.deleteCommandeDto(com.id).subscribe(data => {
+          this.toastr.error('avec succès','Commande supprimé ', {
+            timeOut: 1500,
+            positionClass: 'toast-top-right',
+          });
+          this.commandeDTOList = this.commandeDTOList.filter(u => u !== com);
+          this.getListCommandeDtos();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);

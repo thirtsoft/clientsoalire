@@ -75,13 +75,12 @@ export class ListScategoryComponent implements OnInit {
   addEditScategorie(item: ScategoryDto) {}
   */
 
-  onDeleteScategorie(id: number): void{
+/*   onDeleteScategorie(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
         this.scategorieService.deleteScategoryDto(id).subscribe(data => {
           this.toastr.warning('Scategory supprimé avec succès!');
-//          this.scategoryListDTO = this.scategoryListDTO.filter(u => u !== scatetgory);
           this.getScategoryDTOs();
         });
       }
@@ -90,19 +89,18 @@ export class ListScategoryComponent implements OnInit {
       alert(error.message);
     }
     );
+  } */
+
+  onDeleteScategorie(id: number): void{
+        this.scategorieService.deleteScategoryDto(id).subscribe(data => {
+          this.toastr.warning('Scategory supprimé avec succès!');
+          this.getScategoryDTOs();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
 
- /*  public onDeleteScategorie(scategorieId: number): void {
-    this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
-    this.scategorieService.deleteScategoryDto(scategorieId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getScategoryDTOs();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  } */
 
 }

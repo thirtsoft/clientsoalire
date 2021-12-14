@@ -71,13 +71,12 @@ export class ListFournisseurComponent implements OnInit {
   addEditFournisseur(i) {}
   */
 
-  public onDeleteForunisseur(id: number): void{
+ /*  public onDeleteForunisseur(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
         this.fournisseurService.deleteFournisseurDto(id).subscribe(data => {
           this.toastr.warning('Fournisseur supprimé avec succès!');
-//          this.fournisseurDTOList = this.fournisseurDTOList.filter(u => u !== four);
           this.getListFournisseurDTOs();
         });
       }
@@ -86,5 +85,20 @@ export class ListFournisseurComponent implements OnInit {
       alert(error.message);
     }
     );
+  } */
+
+  public onDeleteForunisseur(id: number): void{
+
+        this.fournisseurService.deleteFournisseurDto(id).subscribe(data => {
+          this.toastr.warning('Fournisseur supprimé avec succès!');
+
+          this.getListFournisseurDTOs();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
+
+
 }

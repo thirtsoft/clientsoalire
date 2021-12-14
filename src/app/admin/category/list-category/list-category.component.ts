@@ -69,16 +69,27 @@ export class ListCategoryComponent implements OnInit {
 
   addEditCategory(catId?: number) {}
   */
-  public onDeleteCategory(id: number): void{
+ /*  public onDeleteCategory(id: number): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
         this.categoryService.deleteCategoryDto(id).subscribe(data => {
           this.toastr.warning('Category supprimé avec succès!');
-      //    this.categoryListDTO = this.categoryListDTO.filter(u => u !== cat);
           this.getListCategoryDTOs();
         });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  } */
+
+  public onDeleteCategory(id: number): void{
+
+        this.categoryService.deleteCategoryDto(id).subscribe(data => {
+          this.toastr.warning('Category supprimé avec succès!');
+          this.getListCategoryDTOs();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);

@@ -66,7 +66,7 @@ export class ListUtilisateurComponent implements OnInit {
     });
   }
 
-  onDeleteUtilisateur(user: UtilisateurDto): void{
+ /*  onDeleteUtilisateur(user: UtilisateurDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -81,6 +81,20 @@ export class ListUtilisateurComponent implements OnInit {
       alert(error.message);
     }
     );
+  } */
+
+  onDeleteUtilisateur(user: UtilisateurDto): void{
+
+        this.userService.deleteUtilisateurDto(user.id).subscribe(data => {
+          this.toastr.warning('Utilisateur supprimé avec succès!');
+          this.utilisateurDTOList = this.utilisateurDTOList.filter(u => u !== user);
+          this.getUtilisateurDTOs();
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
+
 
 }

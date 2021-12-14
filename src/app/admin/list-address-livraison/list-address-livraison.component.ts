@@ -44,7 +44,7 @@ export class ListAddressLivraisonComponent implements OnInit {
     );
   }
 
-  public onDeleteAddressLivraison(livraison: AddressLivraisonDto): void{
+/*   public onDeleteAddressLivraison(livraison: AddressLivraisonDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -59,5 +59,20 @@ export class ListAddressLivraisonComponent implements OnInit {
       alert(error.message);
     }
     );
+  } */
+
+  public onDeleteAddressLivraison(livraison: AddressLivraisonDto): void{
+
+        this.addLivraisonService.deleteAddressLivraisonDto(livraison.id).subscribe(data => {
+          this.toastr.warning('AddressLivraison supprimé avec succès!');
+          this.addressLivraisonDTOList = this.addressLivraisonDTOList.filter(u => u !== livraison);
+          this.getAddressLivraisonDtos();
+  
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
   }
+
 }

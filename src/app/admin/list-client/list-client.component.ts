@@ -44,7 +44,7 @@ export class ListClientComponent implements OnInit {
     );
   }
 
-  onDeleteClient(client: ClientDto): void{
+ /*  onDeleteClient(client: ClientDto): void{
     this.dialogService.openConfirmDialog('Etes-vous sur de vouloir Supprimer cet donnée ?')
     .afterClosed().subscribe((response: any) =>{
       if(response){
@@ -54,6 +54,19 @@ export class ListClientComponent implements OnInit {
           this.getListClientDtos();
         });
       }
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    );
+  } */
+
+  onDeleteClient(client: ClientDto): void{
+
+        this.clientService.deleteClientDto(client.id).subscribe(data => {
+          this.toastr.warning('Client supprimé avec succès!');
+          this.clientDTOList = this.clientDTOList.filter(u => u !== client);
+          this.getListClientDtos();
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
