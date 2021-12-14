@@ -51,6 +51,10 @@ import { ContactComponent } from './contact/contact.component';
 import { CartContentComponent } from './cart-content/cart-content.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { AboutComponent } from './about/about.component';
+import { SearchbyPriceComponent } from './searchby-price/searchby-price.component';
+import { SearchInShopComponent } from './search-in-shop/search-in-shop.component';
+import { SidebarSubcatComponent } from './sidebar-subcat/sidebar-subcat.component';
+import { SidebarHomeComponent } from './sidebar-home/sidebar-home.component';
 
 
 @NgModule({
@@ -92,7 +96,11 @@ import { AboutComponent } from './about/about.component';
     ContactComponent,
     CartContentComponent,
     CartItemComponent,
-    AboutComponent
+    AboutComponent,
+    SearchbyPriceComponent,
+    SearchInShopComponent,
+    SidebarSubcatComponent,
+    SidebarHomeComponent
   ],
 
   imports: [

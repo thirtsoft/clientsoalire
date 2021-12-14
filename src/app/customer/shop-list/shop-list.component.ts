@@ -1,7 +1,14 @@
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from './../../services/cart.service';
+import { ArticleService } from './../../services/article.service';
+import { CatalogueService } from './../../services/catalogue.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CartItem } from './../../models/cart-item';
+import { ArticleDto } from './../../models/article';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../shared/data.service';
 import  axios  from 'axios';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shop-list',
@@ -12,45 +19,216 @@ export class ShopListComponent implements OnInit {
 
   cart:any;
   products: any;
-  constructor(private dataService: DataService,
+  articleListDTOBs: ArticleDto[];
+
+  size: number = 6;
+  currentPage: number = 1;
+  totalPages: number;
+  pages: Array<number>;
+
+  currentTime: number = 0;
+
+  currentCategoryId: number;
+
+  previousCategoryId: number = 1;
+
+  searchMode: boolean = false;
+
+  priceSearch: number;
+
+  starRating = 0;
+
+  currentRating = 4;
+
+  constructor(public catalogueService: CatalogueService,
+              private artService: ArticleService,
+              private cartService: CartService,
+              private toastr: ToastrService,
+              private route: ActivatedRoute,
               private router: Router,
-  //            private productService:ProductService,
   ){ }
 
-  ngOnInit(): void {
-    this.dataService.currentCart.subscribe(editCart => (this.cart = editCart));
+  ngOnInit() {
+  //  this.dataService.currentCart.subscribe(editCart => (this.cart = editCart));
+  this.route.paramMap.subscribe(()=> {
+    this.getListArticleDTOs();
+  });
 
-    // get from data using axios
-      this.getProducts();
   }
 
-  async getProducts() {
-    try {
-      const response = await  axios.get('assets/data/products.json');
-      console.log("response data", response.data);
-      console.log("response status", response.status);
+  public getArticleListDTOs() {
+    this.artService.getArticleDTOs().subscribe(
+      (response: ArticleDto[]) => {
+        this.articleListDTOBs = response;
+        console.log(this.articleListDTOBs);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
 
-      this.products = response.data;
+  }
 
-    } catch (e) {
-      console.log(e);
+  getListArticleDTOs() {
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    this.priceSearch = +this.route.snapshot.paramMap.get('price');
+    if (this.searchMode) {
+      this.getArticleListDTOsBySearchKeyword();
+    }
+     else  {
+      this.handlerListArticleDTOs();
+    //  this.getArticleListDTOsBySamePriceByPageable();
     }
 
   }
 
-  add2cat(qty,product) {
-    //  let tmpCart = {cart: this.cart.cart + item, products: []};
-      this.cart.products.push(product);
-      this.cart.cart = this.cart.cart + qty;
-   //   this.cart++;
-      this.dataService.updateCart(this.cart);
-  
-      console.log("this.cart--", this.cart);
+  handlerListArticleDTOs() {
+    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+
+    if (hasCategoryId) {
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+    }else {
+      this.currentCategoryId = 1;
+    }
+
+    if(this.previousCategoryId != this.currentCategoryId) {
+      this.currentPage = 1;
+    }
+    this.previousCategoryId = this.currentCategoryId;
+
+    this.catalogueService.getListArticleDTOByScategoryByPageable(
+          this.currentCategoryId,
+          this.currentPage - 1,
+          this.size).subscribe(this.processResult());
   }
-  
+
+  getArticleListDTOsBySamePriceByPageable() {
+    const hasPriceId: boolean = this.route.snapshot.paramMap.has('price');
+    if (hasPriceId) {
+      this.priceSearch = +this.route.snapshot.paramMap.get('price');
+    }
+    this.catalogueService.getListArticleDTOBySamePriceByPageable(
+        this.priceSearch,
+        this.currentPage - 1,
+          this.size).subscribe(this.processResult());
+
+  }
+
+  processResult() {
+    return data => {
+      this.totalPages = data['totalPages'];
+      this.pages = new Array(data['totalPages']);
+      this.articleListDTOBs = data['content'];
+    }
+
+  }
+
+   // Liste des produits par page
+   getArticleDTOByPageable() {
+    this.catalogueService.getListArticleDTOByPageable(this.currentPage, this.size)
+      .subscribe(data=> {
+        this.totalPages = data['totalPages'];
+        this.pages = new Array(data['totalPages']);
+        this.articleListDTOBs = data['content'];
+        console.log(data);
+      },err=> {
+        console.log(err);
+      });
+
+  }
+
+  getArticleListDTOsBySearchKeyword() {
+    const keyword: string = this.route.snapshot.paramMap.get('keyword');
+    this.catalogueService.getListArticleDTOByKeyword(keyword).subscribe(
+      data  => {
+        this.articleListDTOBs = data;
+      }
+
+    )
+
+  }
+
+  getArticleListDTOsBySamePrice() {
+    const hasPriceId: boolean = this.route.snapshot.paramMap.has('price');
+    if (hasPriceId) {
+      this.priceSearch = +this.route.snapshot.paramMap.get('price');
+    }
+    this.catalogueService.getListArticleDTOBySamePrice(this.priceSearch).subscribe(
+      data  => {
+        this.articleListDTOBs = data;
+      }
+
+    )
+
+  }
+
+  addTocart(articleDTO: ArticleDto) {
+    console.log(`total designation: ${articleDTO.designation}, total price: ${articleDTO.price}`);
+    const cartItem = new CartItem(articleDTO);
+    this.cartService.addTocart(cartItem);
+    this.toastr.success('au panier avec succès','Article Ajoutée', {
+      timeOut: 1500,
+      positionClass: 'toast-top-right',
+    });
+
+  }
+
+  getTS() {
+    return this.currentTime;
+  }
+
+  onPageArticle(i) {
+    this.currentPage = i;
+    this.getArticleDTOByPageable();
+  }
+
+  sort(event: any) {
+    console.log(event.target.value)
+    switch (event.target.value) {
+      case "Low":
+        {
+          this.articleListDTOBs = this.articleListDTOBs.sort((low, high) => low.price - high.price);
+          break;
+        }
+
+      case "High":
+        {
+          this.articleListDTOBs = this.articleListDTOBs.sort((low, high) => high.price - low.price);
+          break;
+        }
+
+      case "Name":
+        {
+          this.articleListDTOBs = this.articleListDTOBs.sort(function (low, high) {
+            if (low.designation < high.designation) {
+              return -1;
+            }
+            else if (low.designation > high.designation) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          })
+          break;
+        }
+
+      default: {
+        this.articleListDTOBs = this.articleListDTOBs.sort((low, high) => low.price - high.price);
+        break;
+      }
+
+    }
+    return this.articleListDTOBs;
+
+
+
+  }
+
+
+
   bynow() {
     this.router.navigate(["cart"]);
   }
-
 
 }

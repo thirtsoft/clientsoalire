@@ -1,0 +1,19 @@
+<div class="filter-widget">
+  <h4 class="fw-title">Categories</h4>
+  <ul
+    *ngFor="let scatDTO of scategoryListDTOs; let i = index"
+    class="filter-catagories"
+  >
+    <li>
+      <a
+        [routerLink]="['/category', scatDTO.id]"
+        class="nav-link"
+        style="cursor: pointer"
+      >
+        {{ scatDTO.libelle }}
+      </a>
+    </li>
+    <!--       <li><a href="#">Women</a></li>
+      <li><a href="#">Kids</a></li> -->
+  </ul>
+</div>

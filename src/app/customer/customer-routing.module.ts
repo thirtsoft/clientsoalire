@@ -75,6 +75,18 @@ const routes: Routes = [
     component: ShopListComponent
   },
   {
+    path: 'category/:id',
+    component: ShopListComponent
+  },
+  {
+    path: 'searchInshop/:keyword',
+    component: ShopListComponent
+  },
+  {
+    path: 'searchbyPrice/:price',
+    component: ShopListComponent
+  },
+  {
     path: 'account-orders',
     component: AccountOrderComponent
   },

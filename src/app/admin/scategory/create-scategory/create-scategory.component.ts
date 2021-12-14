@@ -55,7 +55,7 @@ export class CreateScategoryComponent implements OnInit {
   }
 
   getListCategoryDTOs() {
-    this.catService.getCategoryDTOs().subscribe(
+    this.catService.getCategorieDTOs().subscribe(
       (response: CategoryDto[]) => {
         this.categoryListDTO = response;
       }, (error: HttpErrorResponse) => {
