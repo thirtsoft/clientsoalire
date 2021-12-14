@@ -1,3 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { ScategoryDto } from './../../models/scategory';
+import { ScategoryService } from './../../services/scategory.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from './../../auth/token-storage.service';
@@ -39,15 +42,20 @@ export class HeaderComponent implements OnInit {
 
   currentUser;
 
+  scategoryListDTOs: ScategoryDto[];
+
   constructor(public cartService: CartService,
               public catalogueService: CatalogueService,
               public autService: AuthService,
               private tokenService: TokenStorageService,
               private router: Router,
+              private scatService: ScategoryService
   ) {}
 
   ngOnInit(): void {
     this.updateCartStatus();
+
+    this.getScategoryListDTOs();
 
     this.isLoggedIn = !!this.tokenService.getToken();
     if (this.isLoggedIn) {
@@ -142,6 +150,19 @@ export class HeaderComponent implements OnInit {
 
   getTS() {
     return this.currentTime;
+  }
+
+  public getScategoryListDTOs() {
+    this.scatService.getScategoryDtos().subscribe(
+      (response: ScategoryDto[]) => {
+        this.scategoryListDTOs = response;
+        console.log(this.scategoryListDTOs);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
 
 

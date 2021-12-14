@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="./index.html">
+                        <a routerLink="/" >
                             <img src="assets/customer/img/logo.png" alt="">
                         </a>
                     </div>
@@ -153,11 +153,18 @@
     <div class="nav-item">
         <div class="container">
             <div class="nav-depart">
-                <div class="depart-btn">
+
+              <app-sidebar></app-sidebar>
+
+
+
+              <!-- <div class="depart-btn" >
                     <i class="ti-menu"></i>
-                    <span>All departments</span>
-                    <ul class="depart-hover">
-                        <li class="active"><a href="#">Women’s Clothing</a></li>
+                  <span>Tous Categories </span>
+
+
+                     <ul class="depart-hover" >
+                        <li  *ngFor="let scatDTO of scategoryListDTOs; let i = index;" class="active"><a [routerLink]="['/shop']"  style="cursor: pointer" href="#">{{ scatDTO.libelle }}</a></li>
                         <li><a href="#">Men’s Clothing</a></li>
                         <li><a href="#">Underwear</a></li>
                         <li><a href="#">Kid's Clothing</a></li>
@@ -166,7 +173,7 @@
                         <li><a href="#">Luxury Brands</a></li>
                         <li><a href="#">Brand Outdoor Apparel</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>

@@ -81,7 +81,8 @@ import { NavDesktopComponent } from './header/customer/top/nav-desktop/nav-deskt
     ToastrModule.forRoot(),
     MatDialogModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+
   ],
   providers: [
     DatePipe,
