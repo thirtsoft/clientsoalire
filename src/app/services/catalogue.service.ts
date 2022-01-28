@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../auth/token-storage.service';
 import { Observable } from 'rxjs';
 import { ArticleDto } from './../models/article';
 import { HttpClient } from '@angular/common/http';
@@ -18,8 +19,8 @@ export class CatalogueService {
 //  public host:string="http://localhost:8080";
   public apiBaseUrl: 'http://localhost:8081/casa-solaire/v1';
 
-  constructor(private http: HttpClient
-  //            private tokenService: TokenStorageService
+  constructor(private http: HttpClient,
+            private tokenService: TokenStorageService
   ) {
   }
 
@@ -51,7 +52,6 @@ export class CatalogueService {
     return this.http.get<ArticleDto[]>(`${this.apiServerUrl}/articles/searchArticleByPriceMinMax/${min}/${max}`);
   }
 
-
   public getListArticleDTOByScategoryByPageable(scatId: number, page: number, size: number): Observable<ArticleDto[]> {
     const searchUrl = (this.apiServerUrl+"/articles/searchArticleByScategoryByPageables?id="+scatId+"&page="+page+"&size="+size);
     console.log("Search Url---", searchUrl);
@@ -65,11 +65,15 @@ export class CatalogueService {
     return this.http.get<ArticleDto[]>(searchbyPriceUrl);
   }
 
+  public countNumberOfProductInSubCategory(sucatId: number): Observable<ArticleDto> {
+    return this.http.get<ArticleDto>(`${this.apiServerUrl}/articles/countNumberOfProductInSubCat/${sucatId}`);
+  }
+
   public getPhotoArticle() {
     return this.http.get(`${this.apiServerUrl}/articles/photoArticle`);
   }
 
- /*  getCurrentUser(): Observable<any> {
+  getCurrentUser(): Observable<any> {
     return this.tokenService.getUser();
   }
 
@@ -81,17 +85,14 @@ export class CatalogueService {
   getUsername() {
     const user = this.tokenService.getUser();
     this.username = user.username;
-  } */
+  }
 
 
   getUserId() {
-  //  const user = this.tokenService.getUser();
-  //  this.id = user.id
-    /* this.authService.getUserById(this.id).subscribe(arg => {
-      this.currentUser = arg;
-      console.log(this.currentUser);
-    });
-    ; */
+    const user = this.tokenService.getUser();
+    this.id = user.id;
   }
+
+
 
 }

@@ -6,7 +6,7 @@ import { Client } from './client';
 
 export class Purchase {
   client: Client;
-  shippingAddress: Address;
+//  shippingAddress: Address;
   billingAddress: Address;
   commande: Commande;
   lcomms: LigneCommande[];

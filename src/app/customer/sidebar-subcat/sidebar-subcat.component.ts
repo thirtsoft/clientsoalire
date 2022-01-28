@@ -1,3 +1,4 @@
+import { CatalogueService } from './../../services/catalogue.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -13,8 +14,10 @@ export class SidebarSubcatComponent implements OnInit {
 
   scategoryListDTOs: ScategoryDto[];
 
-  constructor(private scatService: ScategoryService,
+  numberOfProduct;
 
+  constructor(private scatService: ScategoryService,
+              public catalogueService: CatalogueService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +34,16 @@ export class SidebarSubcatComponent implements OnInit {
       }
     );
 
+  }
+
+  countNumberOfProductInsubCat() {
+    this.catalogueService.countNumberOfProductInSubCategory(this.scategoryListDTOs[0].id)
+      .subscribe(data=> {
+        console.log(data);
+        this.numberOfProduct = data;
+      },err=> {
+        console.log(err);
+      });
   }
 
 }

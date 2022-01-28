@@ -4,6 +4,7 @@ export class Address {
   reference: string;
   city: string;
   state: string;
+  country: string;
   zipCode: string;
 
   commande: Commande;
@@ -15,6 +16,7 @@ export class AddressDto {
   reference: string;
   city: string;
   state: string;
+  country: string;
   zipCode: string;
 
   commandeDto: CommandeDto;

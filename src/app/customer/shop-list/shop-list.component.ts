@@ -125,8 +125,8 @@ export class ShopListComponent implements OnInit {
 
   }
 
-   // Liste des produits par page
-   getArticleDTOByPageable() {
+  // Liste des produits par page
+  getArticleDTOByPageable() {
     this.catalogueService.getListArticleDTOByPageable(this.currentPage, this.size)
       .subscribe(data=> {
         this.totalPages = data['totalPages'];
@@ -224,13 +224,12 @@ export class ShopListComponent implements OnInit {
     return this.articleListDTOBs;
 
 
-
   }
-
-
 
   bynow() {
     this.router.navigate(["cart"]);
   }
+
+
 
 }

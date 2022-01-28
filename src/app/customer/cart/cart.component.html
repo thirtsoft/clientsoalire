@@ -148,7 +148,12 @@
 
         <div class="row" *ngIf="cartItems.length > 0">
           <div class="col-lg-4">
-            <div class="cart-buttons">
+            <div class="cart-buttons"*ngIf="!this.isLoggedIn">
+              <a routerLink="/" class="primary-btn up-cart"
+                >Continuez votre Achat</a
+              >
+            </div>
+            <div class="cart-buttons"*ngIf="this.isLoggedIn">
               <a routerLink="/" class="primary-btn up-cart"
                 >Continuez votre Achat</a
               >
@@ -165,10 +170,16 @@
                 </li>
               </ul>
               <a
+                *ngIf="!this.isLoggedIn"
+                routerLink="/auth/login"
+                class="proceed-btn"
+                >Passer votre Commande</a
+              >
+              <a
                 *ngIf="this.isLoggedIn"
                 routerLink="/checkout"
                 class="proceed-btn"
-                >PASSER A LA COMMANDE</a
+                >Passer votre Commande</a
               >
             </div>
           </div>

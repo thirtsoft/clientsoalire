@@ -1,8 +1,8 @@
-
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+import { TokenStorageService } from './../auth/token-storage.service';
 import { Purchase } from './../models/purchase';
 
 import { environment } from 'src/environments/environment';
@@ -16,8 +16,8 @@ export class CheckoutService {
 
   id;
 
-  constructor(private http: HttpClient
-  //            private tokenService: TokenStorageService
+  constructor(private http: HttpClient,
+              private tokenService: TokenStorageService
   ) {
   }
 
@@ -43,13 +43,8 @@ export class CheckoutService {
   }
 
   getUserId() {
- //   const user = this.tokenService.getUser();
-  //  this.id = user.id
-    /* this.authService.getUserById(this.id).subscribe(arg => {
-      this.currentUser = arg;
-      console.log(this.currentUser);
-    });
-    ; */
+    const user = this.tokenService.getUser();
+    this.id = user.id
   }
 
 
