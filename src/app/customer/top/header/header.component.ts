@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.updateCartStatus();
 
-
     this.isLoggedIn = !!this.tokenService.getToken();
     if (this.isLoggedIn) {
       const user = this.tokenService.getUser();

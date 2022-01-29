@@ -4,14 +4,13 @@ import { CustomerRoutingModule } from './customer-routing.module';
 
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
-
-
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination' ;
 
+import { MatDialogModule} from '@angular/material/dialog';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -63,6 +62,9 @@ import { FooterComponent } from './bottom/footer/footer.component';
 import { FooerbottomComponent } from './bottom/fooerbottom/fooerbottom.component';
 import { MainfooterComponent } from './bottom/mainfooter/mainfooter.component';
 import { HeaderComponent } from './top/header/header.component';
+import { UpdateCustomerUsernameComponent } from './account-order/update-customer-username/update-customer-username.component';
+import { UpdateCustomerPasswordComponent } from './account-order/update-customer-password/update-customer-password.component';
+import { CustomerFactureComponent } from './account-order/customer-facture/customer-facture.component';
 
 
 @NgModule({
@@ -117,6 +119,9 @@ import { HeaderComponent } from './top/header/header.component';
     FooerbottomComponent,
     MainfooterComponent,
     HeaderComponent,
+    UpdateCustomerUsernameComponent,
+    UpdateCustomerPasswordComponent,
+    CustomerFactureComponent,
   ],
 
   imports: [
@@ -125,12 +130,11 @@ import { HeaderComponent } from './top/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-
-
     MatExpansionModule,
     MatPaginatorModule,
     Ng2SearchPipeModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatDialogModule
   ],
   entryComponents: [
 

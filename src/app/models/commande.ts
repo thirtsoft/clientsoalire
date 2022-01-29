@@ -26,6 +26,7 @@ export class CommandeDto {
   reference: string;
   numeroCommande: string;
   totalQuantity: number;
+  totalCommande: number;
   total: number;
   dateCommande: Date;
 

@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="breadcrumb-text product-more">
-          <a routerLink="/"><i class="fa fa-home"></i> Home</a>
-          <a routerLink="/shop">Shop</a>
-          <span>Shopping Cart</span>
+          <a routerLink="/"><i class="fa fa-home"></i> Accueil</a>
+          <a routerLink="/shop">Boutique</a>
+          <span>Votre Panier</span>
         </div>
       </div>
     </div>
@@ -148,12 +148,12 @@
 
         <div class="row" *ngIf="cartItems.length > 0">
           <div class="col-lg-4">
-            <div class="cart-buttons"*ngIf="!this.isLoggedIn">
+            <div class="cart-buttons" *ngIf="!this.isLoggedIn">
               <a routerLink="/" class="primary-btn up-cart"
                 >Continuez votre Achat</a
               >
             </div>
-            <div class="cart-buttons"*ngIf="this.isLoggedIn">
+            <div class="cart-buttons" *ngIf="this.isLoggedIn">
               <a routerLink="/" class="primary-btn up-cart"
                 >Continuez votre Achat</a
               >

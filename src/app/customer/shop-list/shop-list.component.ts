@@ -51,7 +51,6 @@ export class ShopListComponent implements OnInit {
   ){ }
 
   ngOnInit() {
-  //  this.dataService.currentCart.subscribe(editCart => (this.cart = editCart));
   this.route.paramMap.subscribe(()=> {
     this.getListArticleDTOs();
   });
@@ -113,7 +112,6 @@ export class ShopListComponent implements OnInit {
         this.priceSearch,
         this.currentPage - 1,
           this.size).subscribe(this.processResult());
-
   }
 
   processResult() {

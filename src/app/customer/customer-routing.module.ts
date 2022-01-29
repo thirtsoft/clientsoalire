@@ -1,3 +1,4 @@
+import { CustomerFactureComponent } from './account-order/customer-facture/customer-facture.component';
 import { AboutComponent } from './about/about.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { ContactComponent } from './contact/contact.component';
@@ -90,9 +91,22 @@ const routes: Routes = [
     component: ShopListComponent
   },
   {
-    path: 'account-orders',
+    path: 'my-account/:id',
     component: AccountOrderComponent
   },
+  {
+    path: 'my-account/:id',
+    component: AccountOrderComponent
+  },
+  {
+    path: 'my-account/:id',
+    component: AccountOrderComponent
+  },
+  {
+    path : 'facture/:id',
+    component : CustomerFactureComponent
+  },
+
   {
     path: 'account-wishList',
     component: WishListComponent
